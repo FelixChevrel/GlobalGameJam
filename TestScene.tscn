@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwnjaw8dqj10e"]
+[gd_scene load_steps=5 format=3 uid="uid://bwnjaw8dqj10e"]
 
 [ext_resource type="Texture2D" uid="uid://c2mbde34m075t" path="res://icon.svg" id="1_qc8qo"]
 [ext_resource type="PackedScene" uid="uid://dohd1u16v6q4v" path="res://PlayerCharacter/SCN_PrawnPlayer.tscn" id="2_ikc40"]
+[ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="3_qf0uw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x25tc"]
 size = Vector2(128.136, 122)
@@ -14,9 +15,14 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
 position = Vector2(0.0340157, 0)
 shape = SubResource("RectangleShape2D_x25tc")
 
 [node name="PlatformerController2D" parent="." instance=ExtResource("2_ikc40")]
+
+[node name="WaterDroplet" parent="." instance=ExtResource("3_qf0uw")]
+position = Vector2(407, 149)

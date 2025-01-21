@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dohd1u16v6q4v"]
+[gd_scene load_steps=7 format=3 uid="uid://dohd1u16v6q4v"]
 
 [ext_resource type="Script" path="res://platformer_controller/platformer_controller.gd" id="1_s261a"]
 [ext_resource type="Texture2D" uid="uid://c2mbde34m075t" path="res://icon.svg" id="2_pv007"]
+[ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="2_smj8w"]
 [ext_resource type="Script" path="res://Scripts/bubble.gd" id="3_0yaw3"]
 [ext_resource type="Texture2D" uid="uid://cvk1pw7tp4s04" path="res://utilitySprite/plain-circle.svg" id="4_gwj2t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1mndu"]
 radius = 50.0
 
-[node name="PlatformerController2D" type="CharacterBody2D"]
+[node name="PlatformerController2D" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_s261a")
+droplet = ExtResource("2_smj8w")
 
 [node name="BubbleShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1mndu")
@@ -36,7 +38,7 @@ texture = ExtResource("2_pv007")
 z_index = 2
 closed = true
 width = 3.0
-default_color = Color(0.72549, 0.839216, 1, 1)
+default_color = Color(0.67451, 1, 1, 1)
 script = ExtResource("3_0yaw3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Line2D"]

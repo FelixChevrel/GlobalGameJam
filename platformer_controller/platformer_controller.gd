@@ -122,6 +122,9 @@ var waterAmount : float = 50
 
 var iframe : bool = false
 
+#droplet
+@export var droplet : PackedScene
+
 #####################################
 
 func _init():
@@ -343,19 +346,47 @@ func LoseWater(loss : float):
 	$Line2D.radius = waterAmount
 	$Line2D.updateWater()
 	
+	var l = loss
+	
+	while l > 0 :
+		
+		#spawn a bunch of droplet
+		var d = droplet.instantiate()
+		var value = float(randi_range(1,3))
+		l = l - value
+		d.waterAmount = value
+		d.scale = Vector2(value/2,value/2)
+		d.position = position #set the droplet position
+		var rX = randf_range(-200,200)
+		d.linear_velocity = Vector2(rX, -500)
+		get_tree().get_root().add_child(d)
+		#add impulse to droplet
+		
+	
+	
 	iframe = true
 	$Iframe.start()
 	if (waterAmount == 0):
 		return # GAME OVER
 	
 
+func gainWater(gain : float):
+	
+	waterAmount = waterAmount + gain
+	
+	$BubbleShape.shape.radius = waterAmount
+	$Line2D.radius = waterAmount
+	$Line2D.updateWater()
+	
+	iframe = true
+	$Iframe.start()
 
 
 ######################################################################################################################
 
 
 func _on_hit_ground():
-	LoseWater(5)
+	LoseWater(6)
 
 
 func _on_iframe_timeout():
