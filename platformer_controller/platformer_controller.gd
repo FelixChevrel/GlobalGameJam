@@ -127,7 +127,7 @@ var iframe : bool = false
 
 #dash 
 var dashValue := Vector2(0,0)
-
+var canDash := true
 
 #####################################
 
@@ -181,12 +181,28 @@ func _input(_event):
 		
 	
 	#Shoot water
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot"):
+		
+		if (!canDash) : return
 		
 		#add velocity
-		dashValue = 300 * dir
+		dashValue = 400 * dir.normalized()
 		velocity = Vector2(0,0)
-		pass
+		
+		#spawn water
+		var d = droplet.instantiate()
+		d.waterAmount = 3
+		waterAmount -= 3
+		d.position = position
+		d.linear_velocity = -dashValue
+		d.initializeSize()
+		get_tree().get_root().add_child(d)
+		
+		$Line2D.updateWater()
+		
+		if !is_on_floor() :
+			canDash = false
+		
 	
 
 
@@ -458,6 +474,7 @@ func SquashAndStretch(delta): #A run a chaque frame, defrome le sprite en foncti
 
 func _on_hit_ground():
 	LoseWater(6)
+	canDash = true
 
 
 func _on_iframe_timeout():
