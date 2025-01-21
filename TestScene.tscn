@@ -9,6 +9,8 @@ size = Vector2(128.136, 122)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="PlatformerController2D" parent="." instance=ExtResource("2_ikc40")]
+
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(566, 582)
 scale = Vector2(14.6953, 1)
@@ -21,8 +23,6 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
 position = Vector2(0.0340157, 0)
 shape = SubResource("RectangleShape2D_x25tc")
-
-[node name="PlatformerController2D" parent="." instance=ExtResource("2_ikc40")]
 
 [node name="WaterDroplet" parent="." instance=ExtResource("3_qf0uw")]
 position = Vector2(407, 149)

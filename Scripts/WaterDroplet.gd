@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 
-@export var waterAmount : float = 2
+@export var waterAmount : float = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,6 +12,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	
+	
 	pass
 
 
@@ -22,8 +25,6 @@ func _on_area_2d_body_entered(body):
 		
 		
 		body.gainWater(waterAmount)
-		
-		print(waterAmount)
 		
 		queue_free()
 	
@@ -36,5 +37,9 @@ func _on_timer_timeout():
 
 func initializeSize():
 	
-	scale = Vector2(waterAmount/2, waterAmount/2)
+	$Droplet.scale = 0.25 * Vector2(waterAmount, waterAmount) * 0.5
+	$CollisionPolygon2D.scale = Vector2(waterAmount, waterAmount) * 0.5
+	$Line2D.scale = Vector2(waterAmount, waterAmount) * 0.5
+	$Area2D.scale = Vector2(waterAmount, waterAmount) * 0.5
+	
 	

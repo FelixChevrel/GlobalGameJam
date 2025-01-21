@@ -125,6 +125,10 @@ var iframe : bool = false
 #droplet
 @export var droplet : PackedScene
 
+#dash 
+var dashValue := Vector2(0,0)
+
+
 #####################################
 
 func _init():
@@ -149,11 +153,16 @@ func _ready():
 
 func _input(_event):
 	acc.x = 0
+	
+	var dir := Vector2(0,0)
+	
 	if Input.is_action_pressed(input_left):
 		acc.x = -max_acceleration
+		dir.x = -1.5
 	
 	if Input.is_action_pressed(input_right):
 		acc.x = max_acceleration
+		dir.x = 1.5
 	
 	if Input.is_action_just_pressed(input_jump):
 		holding_jump = true
@@ -163,9 +172,28 @@ func _input(_event):
 		
 	if Input.is_action_just_released(input_jump):
 		holding_jump = false
+	
+	if Input.is_action_pressed("down"):
+		dir.y = 1
+	
+	if Input.is_action_pressed("Up"):
+		dir.y = -1
+		
+	
+	#Shoot water
+	if Input.is_action_pressed("shoot"):
+		
+		#add velocity
+		dashValue = 300 * dir
+		velocity = Vector2(0,0)
+		pass
+	
 
 
 func _physics_process(delta):
+	
+	
+	
 	if is_coyote_timer_running() or current_jump_type == JumpType.NONE:
 		jumps_left = max_jump_amount
 	if is_feet_on_ground() and current_jump_type == JumpType.NONE:
@@ -194,7 +222,16 @@ func _physics_process(delta):
 	
 	
 	_was_on_ground = is_feet_on_ground()
+	
+	velocity += dashValue
+	if dashValue.length() > 1 :
+		dashValue -= delta * 1000 * dashValue.normalized()
+	else :
+		dashValue = Vector2(0,0)
+	
+	previous_velocity = velocity
 	move_and_slide()
+	SquashAndStretch(delta)
 
 
 ## Use this instead of coyote_timer.start() to check if the coyote_timer is enabled first
@@ -353,9 +390,13 @@ func LoseWater(loss : float):
 		#spawn a bunch of droplet
 		var d = droplet.instantiate()
 		var value = float(randi_range(1,3))
+		
+		if (value > l) :
+			value = l
+		
 		l = l - value
 		d.waterAmount = value
-		d.scale = Vector2(value/2,value/2)
+		d.initializeSize()
 		d.position = position #set the droplet position
 		var rX = randf_range(-200,200)
 		d.linear_velocity = Vector2(rX, -500)
@@ -380,6 +421,36 @@ func gainWater(gain : float):
 	
 	iframe = true
 	$Iframe.start()
+
+#Constante
+var MAX_DEFORM_SPEED = 2000 #La vitesse y à laquelle la déformation maximal est appliqué
+
+var MAX_SQUASH_DEFORM_VALUE = 2 #la déformation maximale
+var MIN_SQUASH_DEFORM_VALUE = 1.2 #la déformation minimal
+
+var MAX_STRETCH_DEFORM_VALUE = 1.75 #la déformation maximale
+var MIN_STRETCH_DEFORM_VALUE = 0.9 #la déformation minimal
+
+
+
+#Var
+var hit_the_ground = false
+var previous_velocity = Vector2() #représente la velocité de la dernière frame
+@onready var spriteRef =  $Line2D
+
+func SquashAndStretch(delta): #A run a chaque frame, defrome le sprite en fonction de la vitesse
+	if !is_on_floor() : #quand ne touche pas le sol
+		hit_the_ground = false
+	  
+	spriteRef.scale.y = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),MIN_STRETCH_DEFORM_VALUE,MAX_STRETCH_DEFORM_VALUE), MIN_STRETCH_DEFORM_VALUE , MAX_STRETCH_DEFORM_VALUE)
+	spriteRef.scale.x = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),1 / MIN_SQUASH_DEFORM_VALUE,1 / MAX_SQUASH_DEFORM_VALUE), MIN_STRETCH_DEFORM_VALUE , MAX_STRETCH_DEFORM_VALUE)    
+	if not hit_the_ground and is_on_floor(): 
+		hit_the_ground = true
+		#
+		spriteRef.scale.y = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),1 / MIN_SQUASH_DEFORM_VALUE,1 / MAX_SQUASH_DEFORM_VALUE), MIN_SQUASH_DEFORM_VALUE, MAX_SQUASH_DEFORM_VALUE)
+		spriteRef.scale.x = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),MIN_SQUASH_DEFORM_VALUE,MAX_SQUASH_DEFORM_VALUE), MIN_SQUASH_DEFORM_VALUE, MAX_SQUASH_DEFORM_VALUE)
+	spriteRef.scale.y = lerp(spriteRef.scale.y, 1.0, 1 - pow(0.01,delta))
+	spriteRef.scale.x = lerp(spriteRef.scale.x, 1.0, 1 - pow(0.01,delta))
 
 
 ######################################################################################################################
