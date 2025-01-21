@@ -15,10 +15,10 @@ signal hit_ground()
 @export var input_jump : String = "jump"
 
 
-const DEFAULT_MAX_JUMP_HEIGHT = 150
+const DEFAULT_MAX_JUMP_HEIGHT = 300
 const DEFAULT_MIN_JUMP_HEIGHT = 60
 const DEFAULT_DOUBLE_JUMP_HEIGHT = 100
-const DEFAULT_JUMP_DURATION = 0.3
+const DEFAULT_JUMP_DURATION = 0.4
 
 var _max_jump_height: float = DEFAULT_MAX_JUMP_HEIGHT
 ## The max jump height in pixels (holding jump).
@@ -126,8 +126,11 @@ var iframe : bool = false
 @export var droplet : PackedScene
 
 #dash 
-var dashValue := Vector2(0,0)
-var canDash := true
+@export var dashDirection := Vector2(0,0)
+@export var dashSpeed : float = 0
+@export var inDash : bool = false
+var DashWaterDrop : Node2D
+
 
 #####################################
 
@@ -135,11 +138,13 @@ func _init():
 	default_gravity = calculate_gravity(max_jump_height, jump_duration)
 	jump_velocity = calculate_jump_velocity(max_jump_height, jump_duration)
 	double_jump_velocity = calculate_jump_velocity2(double_jump_height, default_gravity)
-	release_gravity_multiplier = calculate_release_gravity_multiplier(
-			jump_velocity, min_jump_height, default_gravity)
+	release_gravity_multiplier = calculate_release_gravity_multiplier(jump_velocity, min_jump_height, default_gravity)
 
 
 func _ready():
+	
+	$ShrimpGraphic/ShrimpAnim.play("Forward")
+	
 	if is_coyote_time_enabled:
 		add_child(coyote_timer)
 		coyote_timer.wait_time = coyote_time
@@ -157,12 +162,19 @@ func _input(_event):
 	var dir := Vector2(0,0)
 	
 	if Input.is_action_pressed(input_left):
+		$ShrimpGraphic.flip_h = true
+		$ShrimpGraphic/ShrimpAnim.speed_scale = 1
 		acc.x = -max_acceleration
 		dir.x = -1.5
 	
 	if Input.is_action_pressed(input_right):
+		$ShrimpGraphic.flip_h = false
+		$ShrimpGraphic/ShrimpAnim.speed_scale = 1
 		acc.x = max_acceleration
 		dir.x = 1.5
+	
+	if (dir.x == 0):
+		$ShrimpGraphic/ShrimpAnim.speed_scale = 0.5
 	
 	if Input.is_action_just_pressed(input_jump):
 		holding_jump = true
@@ -181,34 +193,36 @@ func _input(_event):
 		
 	
 	#Shoot water
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		
-		if (!canDash) : return
+		if (inDash) : return
 		
-		#add velocity
-		dashValue = 400 * dir.normalized()
-		velocity = Vector2(0,0)
+		print(dir)
+		dashDirection = dir
+		$DashAnimator.play("Dash")
 		
-		#spawn water
-		var d = droplet.instantiate()
-		d.waterAmount = 3
-		waterAmount -= 3
-		d.position = position
-		d.linear_velocity = -dashValue
-		d.initializeSize()
-		get_tree().get_root().add_child(d)
+		waterAmount -= 4
+		$Graphic/Node2D/Line2D.radius = waterAmount
+		$Graphic/Node2D/Line2D.updateWater()
 		
-		$Line2D.updateWater()
+		DashWaterDrop = droplet.instantiate()
+		DashWaterDrop.waterAmount = 4
+		DashWaterDrop.initializeSize()
 		
-		if !is_on_floor() :
-			canDash = false
-		
+		pass
 	
 
 
 func _physics_process(delta):
 	
-	
+	if inDash :
+		
+		velocity = dashDirection * dashSpeed
+		previous_velocity = velocity
+		move_and_slide()
+		SquashAndStretch(delta)
+		DirectionBuble(delta)
+		return
 	
 	if is_coyote_timer_running() or current_jump_type == JumpType.NONE:
 		jumps_left = max_jump_amount
@@ -239,15 +253,12 @@ func _physics_process(delta):
 	
 	_was_on_ground = is_feet_on_ground()
 	
-	velocity += dashValue
-	if dashValue.length() > 1 :
-		dashValue -= delta * 1000 * dashValue.normalized()
-	else :
-		dashValue = Vector2(0,0)
+	
 	
 	previous_velocity = velocity
 	move_and_slide()
 	SquashAndStretch(delta)
+	DirectionBuble(delta)
 
 
 ## Use this instead of coyote_timer.start() to check if the coyote_timer is enabled first
@@ -353,7 +364,7 @@ func apply_gravity_multipliers_to(gravity) -> float:
 
 
 ## Calculates the desired gravity from jump height and jump duration.  [br]
-## Formula is from [url=https://www.youtube.com/watch?v=hG9SzQxaCm8]this video[/url] 
+	## Formula is from [url=https://www.youtube.com/watch?v=hG9SzQxaCm8]this video[/url] 
 func calculate_gravity(p_max_jump_height, p_jump_duration):
 	return (2 * p_max_jump_height) / pow(p_jump_duration, 2)
 
@@ -396,8 +407,8 @@ func LoseWater(loss : float):
 	
 	waterAmount = max(0, waterAmount-loss)
 	$BubbleShape.shape.radius = waterAmount
-	$Line2D.radius = waterAmount
-	$Line2D.updateWater()
+	$Graphic/Node2D/Line2D.radius = waterAmount
+	$Graphic/Node2D/Line2D.updateWater()
 	
 	var l = loss
 	
@@ -432,8 +443,8 @@ func gainWater(gain : float):
 	waterAmount = waterAmount + gain
 	
 	$BubbleShape.shape.radius = waterAmount
-	$Line2D.radius = waterAmount
-	$Line2D.updateWater()
+	$Graphic/Node2D/Line2D.radius = waterAmount
+	$Graphic/Node2D/Line2D.updateWater()
 	
 	iframe = true
 	$Iframe.start()
@@ -441,42 +452,85 @@ func gainWater(gain : float):
 #Constante
 var MAX_DEFORM_SPEED = 2000 #La vitesse y à laquelle la déformation maximal est appliqué
 
-var MAX_SQUASH_DEFORM_VALUE = 2 #la déformation maximale
-var MIN_SQUASH_DEFORM_VALUE = 1.2 #la déformation minimal
+var MAX_SQUASH_DEFORM_VALUE = 2.2 #la déformation maximale
+var MIN_SQUASH_DEFORM_VALUE = 1.5 #la déformation minimal
 
-var MAX_STRETCH_DEFORM_VALUE = 1.75 #la déformation maximale
-var MIN_STRETCH_DEFORM_VALUE = 0.9 #la déformation minimal
+var MAX_STRETCH_DEFORM_VALUE = 1.8 #la déformation maximale
+var MIN_STRETCH_DEFORM_VALUE = 0.75 #la déformation minimal
+
+var MIN_TIME_BETWEEN_COLLISION_GROUND = 0.5
 
 
 
 #Var
 var hit_the_ground = false
 var previous_velocity = Vector2() #représente la velocité de la dernière frame
-@onready var spriteRef =  $Line2D
+var timeLastGroundCol = 0
+@onready var spriteRefNode =  $Graphic/Node2D
+@onready var spriteRefLine =  $Graphic
 
 func SquashAndStretch(delta): #A run a chaque frame, defrome le sprite en fonction de la vitesse
-	if !is_on_floor() : #quand ne touche pas le sol
+	if !is_on_floor() and ((Time.get_unix_time_from_system() - timeLastGroundCol) >MIN_TIME_BETWEEN_COLLISION_GROUND) : #quand ne touche pas le sol
 		hit_the_ground = false
 	  
-	spriteRef.scale.y = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),MIN_STRETCH_DEFORM_VALUE,MAX_STRETCH_DEFORM_VALUE), MIN_STRETCH_DEFORM_VALUE , MAX_STRETCH_DEFORM_VALUE)
-	spriteRef.scale.x = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),1 / MIN_SQUASH_DEFORM_VALUE,1 / MAX_SQUASH_DEFORM_VALUE), MIN_STRETCH_DEFORM_VALUE , MAX_STRETCH_DEFORM_VALUE)    
-	if not hit_the_ground and is_on_floor(): 
+		spriteRefNode.scale.y = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),MIN_STRETCH_DEFORM_VALUE,MAX_STRETCH_DEFORM_VALUE), 0 , 10)
+		spriteRefNode.scale.x = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),1 / MIN_STRETCH_DEFORM_VALUE,1 / MAX_STRETCH_DEFORM_VALUE),0, 10)    
+	if not hit_the_ground and is_on_floor() and (Time.get_unix_time_from_system() - timeLastGroundCol >MIN_TIME_BETWEEN_COLLISION_GROUND): 
 		hit_the_ground = true
-		#
-		spriteRef.scale.y = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),1 / MIN_SQUASH_DEFORM_VALUE,1 / MAX_SQUASH_DEFORM_VALUE), MIN_SQUASH_DEFORM_VALUE, MAX_SQUASH_DEFORM_VALUE)
-		spriteRef.scale.x = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),MIN_SQUASH_DEFORM_VALUE,MAX_SQUASH_DEFORM_VALUE), MIN_SQUASH_DEFORM_VALUE, MAX_SQUASH_DEFORM_VALUE)
-	spriteRef.scale.y = lerp(spriteRef.scale.y, 1.0, 1 - pow(0.01,delta))
-	spriteRef.scale.x = lerp(spriteRef.scale.x, 1.0, 1 - pow(0.01,delta))
+		timeLastGroundCol = Time.get_unix_time_from_system()
+		
+		spriteRefNode.scale.y = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),1 / MIN_SQUASH_DEFORM_VALUE,1 / MAX_SQUASH_DEFORM_VALUE), 0, 10)
+		spriteRefNode.scale.x = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),MIN_SQUASH_DEFORM_VALUE,MAX_SQUASH_DEFORM_VALUE), 0, 10)
 
+	spriteRefNode.scale.y = lerp(spriteRefNode.scale.y, 1.0, 1 - pow(0.01,delta))
+	spriteRefNode.scale.x = lerp(spriteRefNode.scale.x, 1.0, 1 - pow(0.01,delta))
+
+
+var angleDirectionTheorique:float = 0.0
+var angleDirectionPratique:float = 0.0
+
+var VecUp = Vector2(0,1)
+
+
+var VITESSE_ROTATION_BULLE = 0
+var MIN_SPEED_ROTATION = 50
+
+func DirectionBuble(delta):
+	if is_on_floor():
+		angleDirectionTheorique = 0
+		angleDirectionPratique = 0
+	elif velocity.length() > MIN_SPEED_ROTATION :
+		angleDirectionTheorique = clamp(rad_to_deg(VecUp.angle_to(velocity)),-20,20)
+	else :
+		angleDirectionTheorique = 0
+		angleDirectionPratique = 0
+		#print("speedTooLow")
+	if (velocity.y > 0 ) :
+		angleDirectionTheorique = angleDirectionTheorique
+	else :
+		angleDirectionTheorique = -angleDirectionTheorique
+	angleDirectionPratique = move_toward(angleDirectionPratique,angleDirectionTheorique,delta*VITESSE_ROTATION_BULLE)
+	spriteRefLine.rotation_degrees = angleDirectionPratique
+	
+	#print("angleDirectionTheorique = ",angleDirectionTheorique)
+	#print("spriteRef.rotation_degrees = ",spriteRefLine.rotation_degrees)
+	
 
 ######################################################################################################################
 
 
 func _on_hit_ground():
 	LoseWater(6)
-	canDash = true
 
 
 func _on_iframe_timeout():
 	iframe = false
 	pass # Replace with function body.
+
+
+func releaseWaterDrop():
+	
+	DashWaterDrop.position = position
+	DashWaterDrop.linear_velocity = -dashDirection * dashSpeed
+	get_tree().get_root().add_child(DashWaterDrop)
+	
