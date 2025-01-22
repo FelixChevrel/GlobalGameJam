@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://1u506ll718wq"]
+[gd_scene load_steps=5 format=3 uid="uid://1u506ll718wq"]
 
 [ext_resource type="Texture2D" uid="uid://8l7jg2jkfimf" path="res://utilitySprite/droplet.png" id="1_5mved"]
 [ext_resource type="Script" path="res://Scripts/WaterDroplet.gd" id="1_whibp"]
+[ext_resource type="Curve" uid="uid://b1w7finrxfw8r" path="res://curves/SCN_PrawnPlayer.tres" id="3_17wyn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ckj32"]
 friction = 10.0
@@ -26,6 +27,7 @@ polygon = PackedVector2Array(3, -5, 9, -3, 12, -1, 13, 2, 12, 5, 10, 7, 4, 8, -8
 points = PackedVector2Array(0, -6, 4, -6, 9, -5, 13, -2, 14, 0, 14, 3, 11, 6, 5, 7, 0, 7, -6, 7, -11, 6, -14, 4, -14, 0, -12, -3, -9, -5, -5, -6)
 closed = true
 width = 1.0
+width_curve = ExtResource("3_17wyn")
 default_color = Color(0.67451, 1, 1, 1)
 
 [node name="Area2D" type="Area2D" parent="."]

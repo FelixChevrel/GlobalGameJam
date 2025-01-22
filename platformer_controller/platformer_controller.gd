@@ -177,6 +177,7 @@ func _input(_event):
 	if (dir.x == 0):
 		$ShrimpGraphic/ShrimpAnim.speed_scale = 0.5
 	
+	
 	if Input.is_action_just_pressed(input_jump):
 		holding_jump = true
 		start_jump_buffer_timer()
@@ -259,7 +260,7 @@ func _physics_process(delta):
 	
 	_was_on_ground = is_feet_on_ground()
 	
-	
+	$Graphic/Node2D/Line2D.rotationSpeed = clamp(velocity.x * 0.01, -3, 3)
 	
 	previous_velocity = velocity
 	move_and_slide()

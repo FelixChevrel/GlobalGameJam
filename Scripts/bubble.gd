@@ -8,6 +8,7 @@ var baseRadius :float = radius
 var ptsDefaultArray = []
 
 #ondulationSystem
+var rotationSpeed : float = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,8 +19,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	
+	if (rotationSpeed != 0):
+		
+		$".".rotation += delta * rotationSpeed
+	else :
+		$".".rotation += delta * 0.5
 	
 	
 	pass
@@ -32,6 +36,7 @@ func updateWater():
 	var v = Vector2(radius,0)
 	
 	for i in ptsNbr :
+		
 		
 		add_point(v,i)
 		
