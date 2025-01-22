@@ -129,6 +129,7 @@ var iframe : bool = false
 @export var dashDirection := Vector2(0,0)
 @export var dashSpeed : float = 0
 @export var inDash : bool = false
+var can_dash : bool = true
 var DashWaterDrop : Node2D
 
 
@@ -196,6 +197,9 @@ func _input(_event):
 	if Input.is_action_pressed("shoot"):
 		
 		if (inDash) : return
+		if (!can_dash) : return
+		
+		can_dash = false
 		
 		print(dir)
 		dashDirection = dir
@@ -214,6 +218,8 @@ func _input(_event):
 
 
 func _physics_process(delta):
+	
+	if(is_feet_on_ground()): can_dash = true
 	
 	if inDash :
 		
