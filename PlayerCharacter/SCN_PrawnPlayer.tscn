@@ -134,6 +134,8 @@ _data = {
 }
 
 [node name="PlatformerController2D" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_s261a")
 droplet = ExtResource("2_smj8w")
 dashSpeed = 100.0
@@ -200,7 +202,6 @@ libraries = {
 
 [node name="ColorRect" parent="." instance=ExtResource("16_kfrr7")]
 visible = false
-z_index = 5
 
 [connection signal="hit_ground" from="." to="." method="_on_hit_ground"]
 [connection signal="timeout" from="Iframe" to="." method="_on_iframe_timeout"]
