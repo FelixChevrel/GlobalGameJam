@@ -169,10 +169,15 @@ width_curve = ExtResource("12_fx8lq")
 default_color = Color(0.67451, 1, 1, 1)
 script = ExtResource("3_0yaw3")
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphic/Node2D/Line2D"]
-modulate = Color(0, 1, 1, 0.254902)
-z_index = -1
+[node name="Sprite2D" type="Sprite2D" parent="Graphic/Node2D"]
+self_modulate = Color(0, 1, 1, 0.254902)
 scale = Vector2(0.214844, 0.214844)
+texture = ExtResource("4_gwj2t")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Graphic/Node2D/Sprite2D"]
+self_modulate = Color(0.733333, 1, 1, 0.776471)
+position = Vector2(83.7817, 74.4726)
+scale = Vector2(0.309091, 0.309091)
 texture = ExtResource("4_gwj2t")
 
 [node name="DashAnimator" type="AnimationPlayer" parent="."]

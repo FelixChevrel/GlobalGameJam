@@ -45,4 +45,4 @@ func updateWater():
 		ptsDefaultArray.append(v)
 		
 	
-	$Sprite2D.scale = Vector2(0.215,0.215) * (radius/baseRadius)
+	$"../Sprite2D".scale = Vector2(0.215,0.215) * (radius/baseRadius)

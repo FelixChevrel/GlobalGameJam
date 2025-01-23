@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://f66sty1gxvap"]
+
+[ext_resource type="Script" path="res://Scripts/spawner_falling_drop.gd" id="1_338a4"]
+[ext_resource type="PackedScene" uid="uid://b4njot250eb0i" path="res://gameplayComponent/FallingDrop.tscn" id="2_c7wgl"]
+
+[node name="SpawnerFallingDrop" type="Node2D"]
+script = ExtResource("1_338a4")
+droplet = ExtResource("2_c7wgl")
+
+[node name="DropTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]

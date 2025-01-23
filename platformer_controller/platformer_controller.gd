@@ -461,7 +461,7 @@ func gainWater(gain : float):
 	
 	iframe = true
 	$Iframe.start()
-	velocity.y -= 500
+	velocity.y = -500
 
 #Constante
 var MAX_DEFORM_SPEED = 2000 #La vitesse y à laquelle la déformation maximal est appliqué
@@ -536,7 +536,7 @@ func DirectionBuble(delta):
 func _on_hit_ground():
 	if apex != null :
 		
-		if (position.y - apex.y) > 100:
+		if (position.y - apex.y) > 200:
 			
 			LoseWater(6)
 		
