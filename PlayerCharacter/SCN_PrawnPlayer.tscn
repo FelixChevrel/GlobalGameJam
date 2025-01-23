@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dohd1u16v6q4v"]
+[gd_scene load_steps=24 format=3 uid="uid://dohd1u16v6q4v"]
 
 [ext_resource type="Script" path="res://platformer_controller/platformer_controller.gd" id="1_s261a"]
 [ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="2_smj8w"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b6ayg3o0e228a" path="res://PlayerCharacter/sprite/IMG_2415.png" id="11_nr0vc"]
 [ext_resource type="Curve" uid="uid://b1w7finrxfw8r" path="res://curves/SCN_PrawnPlayer.tres" id="12_fx8lq"]
 [ext_resource type="Script" path="res://Scripts/WaterLabel.gd" id="15_nxdhq"]
+[ext_resource type="PackedScene" uid="uid://djgggyx8m0xd" path="res://PauseMenu.tscn" id="16_kfrr7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1mndu"]
 radius = 50.0
@@ -196,6 +197,10 @@ script = ExtResource("15_nxdhq")
 libraries = {
 "": SubResource("AnimationLibrary_xrf1g")
 }
+
+[node name="ColorRect" parent="." instance=ExtResource("16_kfrr7")]
+visible = false
+z_index = 5
 
 [connection signal="hit_ground" from="." to="." method="_on_hit_ground"]
 [connection signal="timeout" from="Iframe" to="." method="_on_iframe_timeout"]
