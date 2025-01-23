@@ -132,6 +132,9 @@ var iframe : bool = false
 var can_dash : bool = true
 var DashWaterDrop : Node2D
 
+#apex of jump (need to be untyped)
+var apex = null
+
 
 #####################################
 
@@ -258,9 +261,12 @@ func _physics_process(delta):
 	velocity += acc * delta
 	
 	
-	_was_on_ground = is_feet_on_ground()
 	
+	_was_on_ground = is_feet_on_ground()
 	$Graphic/Node2D/Line2D.rotationSpeed = clamp(velocity.x * 0.01, -3, 3)
+	
+	if (apex == null) && (velocity.y > 0) && (!is_feet_on_ground()):
+		apex = position
 	
 	previous_velocity = velocity
 	move_and_slide()
@@ -455,6 +461,7 @@ func gainWater(gain : float):
 	
 	iframe = true
 	$Iframe.start()
+	velocity.y -= 500
 
 #Constante
 var MAX_DEFORM_SPEED = 2000 #La vitesse y à laquelle la déformation maximal est appliqué
@@ -527,7 +534,14 @@ func DirectionBuble(delta):
 
 
 func _on_hit_ground():
-	LoseWater(6)
+	if apex != null :
+		
+		if (position.y - apex.y) > 100:
+			
+			LoseWater(6)
+		
+	
+	apex = null
 
 
 func _on_iframe_timeout():
