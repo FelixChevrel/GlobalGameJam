@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dohd1u16v6q4v"]
+[gd_scene load_steps=23 format=3 uid="uid://dohd1u16v6q4v"]
 
 [ext_resource type="Script" path="res://platformer_controller/platformer_controller.gd" id="1_s261a"]
 [ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="2_smj8w"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://pnov7ek1p07" path="res://PlayerCharacter/sprite/IMG_2416.png" id="10_t7w3e"]
 [ext_resource type="Texture2D" uid="uid://b6ayg3o0e228a" path="res://PlayerCharacter/sprite/IMG_2415.png" id="11_nr0vc"]
 [ext_resource type="Curve" uid="uid://b1w7finrxfw8r" path="res://curves/SCN_PrawnPlayer.tres" id="12_fx8lq"]
+[ext_resource type="Script" path="res://Scripts/WaterLabel.gd" id="15_nxdhq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1mndu"]
 radius = 50.0
@@ -175,10 +176,21 @@ scale = Vector2(0.214844, 0.214844)
 texture = ExtResource("4_gwj2t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Graphic/Node2D/Sprite2D"]
-self_modulate = Color(0.733333, 1, 1, 0.776471)
-position = Vector2(83.7817, 74.4726)
+self_modulate = Color(0.733333, 1, 1, 0.588235)
+position = Vector2(69.8181, -130.327)
 scale = Vector2(0.309091, 0.309091)
 texture = ExtResource("4_gwj2t")
+
+[node name="Label" type="Label" parent="Graphic"]
+self_modulate = Color(0, 0.781058, 0.883574, 1)
+offset_left = -22.0
+offset_top = -133.0
+offset_right = 21.0
+offset_bottom = -98.0
+theme_override_font_sizes/font_size = 25
+text = "100"
+horizontal_alignment = 1
+script = ExtResource("15_nxdhq")
 
 [node name="DashAnimator" type="AnimationPlayer" parent="."]
 libraries = {

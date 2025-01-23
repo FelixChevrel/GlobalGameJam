@@ -36,8 +36,14 @@ func _on_area_2d_body_entered(body):
 		
 		queue_free()
 	
+	if (body.is_in_group("Drinking")):
+		body.waterHeld += waterAmount
+		body.startAnim()
+		queue_free()
+	
 	if (falling) : queue_free()
 	
+
 
 
 func _on_timer_timeout():

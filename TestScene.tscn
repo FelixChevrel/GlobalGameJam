@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwnjaw8dqj10e"]
+[gd_scene load_steps=10 format=3 uid="uid://bwnjaw8dqj10e"]
 
 [ext_resource type="Texture2D" uid="uid://c2mbde34m075t" path="res://icon.svg" id="1_qc8qo"]
 [ext_resource type="PackedScene" uid="uid://dohd1u16v6q4v" path="res://PlayerCharacter/SCN_PrawnPlayer.tscn" id="2_ikc40"]
 [ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="3_qf0uw"]
 [ext_resource type="PackedScene" uid="uid://ds6cffs3y78qq" path="res://gameplayComponent/GPE_WeightedPlatforms.tscn" id="4_jfdei"]
 [ext_resource type="PackedScene" uid="uid://f66sty1gxvap" path="res://gameplayComponent/SPAWNER_fallingDrop.tscn" id="5_d3j53"]
+[ext_resource type="PackedScene" uid="uid://fsgyfv4mrpw3" path="res://gameplayComponent/SandyArea.tscn" id="6_0qdw3"]
+[ext_resource type="PackedScene" uid="uid://bpgbje06befdy" path="res://gameplayComponent/PlantSeed.tscn" id="7_brrr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x25tc"]
 size = Vector2(128.136, 122)
+
+[sub_resource type="Curve" id="Curve_6vcjf"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0803039, 0, 0, Vector2(0.152632, 1), 0.0, -1.39194, 0, 0, Vector2(1, 0.626374), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="Node2D" type="Node2D"]
 
@@ -23,6 +30,19 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon8" type="Sprite2D" parent="."]
+position = Vector2(-1317, 582)
+scale = Vector2(14.6953, 1)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Icon8"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon8/StaticBody2D"]
 position = Vector2(0.0340157, 0)
 shape = SubResource("RectangleShape2D_x25tc")
 
@@ -120,3 +140,103 @@ position = Vector2(2077, 191)
 
 [node name="SpawnerFallingDrop" parent="." instance=ExtResource("5_d3j53")]
 position = Vector2(496, -509)
+
+[node name="SandyArea" parent="." instance=ExtResource("6_0qdw3")]
+position = Vector2(-1063, 518)
+
+[node name="PlantRoot" type="Node2D" parent="."]
+position = Vector2(-1822, 523)
+
+[node name="Icon9" type="Sprite2D" parent="PlantRoot"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-148, -135)
+scale = Vector2(1.4153, 0.32)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon9"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon9/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon10" type="Sprite2D" parent="PlantRoot"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(135, -262)
+scale = Vector2(1.4153, 0.32)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon10"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon10/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon11" type="Sprite2D" parent="PlantRoot"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-156, -421)
+scale = Vector2(1.4153, 0.32)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon11"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon11/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon12" type="Sprite2D" parent="PlantRoot"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(134, -589)
+scale = Vector2(1.4153, 0.32)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon12"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon12/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon13" type="Sprite2D" parent="PlantRoot"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-175, -743)
+scale = Vector2(1.4153, 0.32)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon13"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon13/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon14" type="Sprite2D" parent="PlantRoot"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(132, -859)
+scale = Vector2(1.4153, 0.32)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon14"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon14/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Line2D" type="Line2D" parent="PlantRoot"]
+points = PackedVector2Array(0, 0, -8, -97, -58, -125, -7, -107, 23, -248, 44, -261, 22, -259, -33, -401, -64, -416, -36, -412, 19, -568, 42, -583, 16, -579, -52, -718, -85, -730, -51, -728, 15, -847, 38, -851)
+width = 20.0
+width_curve = SubResource("Curve_6vcjf")
+default_color = Color(0, 1, 0, 1)
+
+[node name="PlantSeed" parent="." node_paths=PackedStringArray("PlanteFinal") instance=ExtResource("7_brrr3")]
+position = Vector2(-1823, 521)
+PlanteFinal = NodePath("../PlantRoot")

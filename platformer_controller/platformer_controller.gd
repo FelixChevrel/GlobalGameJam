@@ -414,7 +414,7 @@ func calculate_speed(p_max_speed, p_friction):
 #######################################################################################################################
 #added functions
 
-func LoseWater(loss : float):
+func LoseWater(loss : float, noDrop = false):
 	
 	if (iframe) : return
 	
@@ -422,6 +422,12 @@ func LoseWater(loss : float):
 	$BubbleShape.shape.radius = waterAmount
 	$Graphic/Node2D/Line2D.radius = waterAmount
 	$Graphic/Node2D/Line2D.updateWater()
+	
+	if (noDrop) : 
+		iframe = true
+		$Iframe.start()
+		
+		return
 	
 	var l = loss
 	
@@ -453,7 +459,7 @@ func LoseWater(loss : float):
 
 func gainWater(gain : float):
 	
-	waterAmount = waterAmount + gain
+	waterAmount = clamp(waterAmount + gain, 0, 100) 
 	
 	$BubbleShape.shape.radius = waterAmount
 	$Graphic/Node2D/Line2D.radius = waterAmount
@@ -486,16 +492,14 @@ var timeLastGroundCol = 0
 func SquashAndStretch(delta): #A run a chaque frame, defrome le sprite en fonction de la vitesse
 	if !is_on_floor() and ((Time.get_unix_time_from_system() - timeLastGroundCol) >MIN_TIME_BETWEEN_COLLISION_GROUND) : #quand ne touche pas le sol
 		hit_the_ground = false
-	  
-		spriteRefNode.scale.y = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),MIN_STRETCH_DEFORM_VALUE,MAX_STRETCH_DEFORM_VALUE), 0 , 10)
-		spriteRefNode.scale.x = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),1 / MIN_STRETCH_DEFORM_VALUE,1 / MAX_STRETCH_DEFORM_VALUE),0, 10)    
+		spriteRefNode.scale.y = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),MIN_STRETCH_DEFORM_VALUE,MAX_STRETCH_DEFORM_VALUE), MIN_STRETCH_DEFORM_VALUE , MAX_STRETCH_DEFORM_VALUE)
+		spriteRefNode.scale.x = clamp(remap(abs(velocity.y),0,abs(MAX_DEFORM_SPEED),1 / MIN_STRETCH_DEFORM_VALUE,1 / MAX_STRETCH_DEFORM_VALUE),MIN_STRETCH_DEFORM_VALUE , MAX_STRETCH_DEFORM_VALUE)    
 	if not hit_the_ground and is_on_floor() and (Time.get_unix_time_from_system() - timeLastGroundCol >MIN_TIME_BETWEEN_COLLISION_GROUND): 
 		hit_the_ground = true
 		timeLastGroundCol = Time.get_unix_time_from_system()
 		
 		spriteRefNode.scale.y = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),1 / MIN_SQUASH_DEFORM_VALUE,1 / MAX_SQUASH_DEFORM_VALUE), 0, 10)
-		spriteRefNode.scale.x = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),MIN_SQUASH_DEFORM_VALUE,MAX_SQUASH_DEFORM_VALUE), 0, 10)
-
+		spriteRefNode.scale.x = clamp(remap(abs(previous_velocity.y),0,abs(MAX_DEFORM_SPEED * 1.5),MIN_SQUASH_DEFORM_VALUE,MAX_SQUASH_DEFORM_VALUE), MIN_SQUASH_DEFORM_VALUE, MAX_SQUASH_DEFORM_VALUE)
 	spriteRefNode.scale.y = lerp(spriteRefNode.scale.y, 1.0, 1 - pow(0.01,delta))
 	spriteRefNode.scale.x = lerp(spriteRefNode.scale.x, 1.0, 1 - pow(0.01,delta))
 
