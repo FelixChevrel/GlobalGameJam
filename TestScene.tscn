@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwnjaw8dqj10e"]
+[gd_scene load_steps=15 format=3 uid="uid://bwnjaw8dqj10e"]
 
 [ext_resource type="Texture2D" uid="uid://c2mbde34m075t" path="res://icon.svg" id="1_qc8qo"]
 [ext_resource type="PackedScene" uid="uid://dohd1u16v6q4v" path="res://PlayerCharacter/SCN_PrawnPlayer.tscn" id="2_ikc40"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bpgbje06befdy" path="res://gameplayComponent/PlantSeed.tscn" id="7_brrr3"]
 [ext_resource type="PackedScene" uid="uid://bhw2gsk66h0li" path="res://gameplayComponent/Grid.tscn" id="8_1hhm3"]
 [ext_resource type="Texture2D" uid="uid://df487xi5vnqhh" path="res://utilitySprite/IMG_2433.png" id="8_7u25t"]
+[ext_resource type="PackedScene" uid="uid://nix5gumhw56j" path="res://gameplayComponent/GPE_BreakableBlock.tscn" id="11_0lf56"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x25tc"]
 size = Vector2(128.136, 122)
@@ -79,7 +80,7 @@ position = Vector2(0.0340157, 0)
 shape = SubResource("RectangleShape2D_x25tc")
 
 [node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(2352, 711)
+position = Vector2(1388, 845)
 scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
@@ -296,3 +297,6 @@ PlanteFinal = NodePath("../PlantRoot")
 
 [node name="Grid" parent="." instance=ExtResource("8_1hhm3")]
 position = Vector2(-582, 529)
+
+[node name="GpeBreakableBlock" parent="." instance=ExtResource("11_0lf56")]
+position = Vector2(1430, 715)

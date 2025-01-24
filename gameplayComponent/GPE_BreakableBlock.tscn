@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://nix5gumhw56j"]
+
+[ext_resource type="Texture2D" uid="uid://b5yn4pgtrwulf" path="res://utilitySprite/plain-square.svg" id="1_dh5xh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ta3dy"]
+size = Vector2(152, 184)
+
+[node name="GpeBreakableBlock" type="StaticBody2D" groups=["breakable"]]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.42, 0.33908, 0.1344, 1)
+scale = Vector2(0.320313, 0.402344)
+texture = ExtResource("1_dh5xh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ta3dy")

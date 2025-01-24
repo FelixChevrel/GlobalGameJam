@@ -568,6 +568,8 @@ func _on_iframe_timeout():
 func releaseWaterDrop():
 	
 	DashWaterDrop.position = position
-	DashWaterDrop.linear_velocity = -dashDirection * dashSpeed
+	
 	get_tree().get_root().add_child(DashWaterDrop)
+	DashWaterDrop.fallingSpeed = -dashDirection * dashSpeed * 100
+	DashWaterDrop.initializeSize()
 	

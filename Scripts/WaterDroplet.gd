@@ -4,6 +4,7 @@ extends RigidBody2D
 @export var waterAmount : float = 1
 @export var falling = false
 @export var fallingSpeed = Vector2(0,500)
+var projectile : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,6 +44,12 @@ func _on_area_2d_body_entered(body):
 		body.startAnim()
 		queue_free()
 	
+	if (body.is_in_group("breakable")):
+		
+		body.queue_free()
+		queue_free()
+		
+	
 	if (falling) : queue_free()
 	
 
@@ -59,6 +66,9 @@ func initializeSize():
 	$Line2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
 	$Area2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
 	
+	if (!falling):
+		linear_velocity = fallingSpeed
+		
 	
 
 

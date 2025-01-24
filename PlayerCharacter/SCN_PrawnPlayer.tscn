@@ -42,21 +42,6 @@ tracks/0/keys = {
 "values": [ExtResource("4_3p423"), ExtResource("5_t2pfl"), ExtResource("6_c0qcp"), ExtResource("7_pfgy8"), ExtResource("8_bhpry"), ExtResource("9_amgps"), ExtResource("10_t7w3e"), ExtResource("11_nr0vc")]
 }
 
-[sub_resource type="Animation" id="Animation_sipvi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_725x3")]
-}
-
 [sub_resource type="Animation" id="Animation_618dl"]
 resource_name = "Jump"
 length = 0.2
@@ -71,6 +56,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("12_2g31y"), ExtResource("13_dthww"), ExtResource("14_ek2bm"), ExtResource("15_ud8hg"), ExtResource("16_wd6uv"), ExtResource("16_wd6uv")]
+}
+
+[sub_resource type="Animation" id="Animation_sipvi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_725x3")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8krmt"]
