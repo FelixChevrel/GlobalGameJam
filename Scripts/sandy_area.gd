@@ -20,20 +20,14 @@ func _on_timer_timeout():
 		
 		if a.is_in_group("Player"):
 			
+			a.damageSound()
 			a.LoseWater(2, true)
 			
 		
-		if a.is_in_group("water"):
-			
-			a.waterAmount -= 1
-			
-			if (a.waterAmount == 0):
-				a.queue_free()
-				
-			
-			a.initializeSize()
-			
-		
-		
 	
-	pass # Replace with function body.
+
+
+
+func _on_body_entered(body):
+	if (body.is_in_group("water")) :
+		body.queue_free()

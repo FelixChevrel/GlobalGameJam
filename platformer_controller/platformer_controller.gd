@@ -137,6 +137,13 @@ var DashWaterDrop2 : Node2D
 #apex of jump (need to be untyped)
 var apex = null
 
+#audio tracks :
+@onready var audioLanding = preload("res://Audio/World/Atterissage.ogg")
+@onready var audioJumping = preload("res://Audio/World/Jump.ogg")
+@onready var audioDamages = preload("res://Audio/World/Dégat.ogg")
+@onready var audioWaterPickUp = preload("res://Audio/World/WaterPickup.ogg")
+@onready var audioWaterShot = preload("res://Audio/World/TirEau.ogg")
+
 
 #####################################
 
@@ -187,8 +194,15 @@ func _input(_event):
 	
 	
 	if Input.is_action_just_pressed(input_jump):
+		#set animations
 		$ShrimpGraphic/AnimationTree.set("parameters/conditions/jumping", true)
 		$ShrimpGraphic/AnimationTree.set("parameters/conditions/Falling", false)
+		
+		#set audio
+		if (is_feet_on_ground()):
+			$AudioStreamPlayer2D.stream = audioJumping
+			$AudioStreamPlayer2D.play()
+		
 		holding_jump = true
 		start_jump_buffer_timer()
 		if (not can_hold_jump and can_ground_jump()) or can_double_jump():
@@ -242,6 +256,9 @@ func _input(_event):
 
 
 func _physics_process(delta):
+	
+	if waterAmount == 0 :
+		$DashAnimator.play("Death")
 	
 	if(is_feet_on_ground()): can_dash = true
 	
@@ -451,6 +468,7 @@ func LoseWater(loss : float, noDrop = false):
 	$Graphic/Node2D/Line2D.radius = (waterAmount + 30)
 	$Graphic/Node2D/Line2D.updateWater()
 	
+	
 	if (noDrop) : 
 		iframe = true
 		$Iframe.start()
@@ -474,18 +492,19 @@ func LoseWater(loss : float, noDrop = false):
 		d.position = position #set the droplet position
 		var rX = randf_range(-200,200)
 		d.linear_velocity = Vector2(rX, -500)
-		get_tree().get_root().add_child(d)
+		$"..".add_child(d)
 		#add impulse to droplet
 		
 	
 	
 	iframe = true
 	$Iframe.start()
-	if (waterAmount == 0):
-		return # GAME OVER
 	
 
 func gainWater(gain : float):
+	
+	$AudioStreamPlayer2D.stream = audioWaterPickUp
+	$AudioStreamPlayer2D.play()
 	
 	waterAmount = clamp(waterAmount + gain, 0, 50) 
 	
@@ -566,10 +585,13 @@ func DirectionBuble(delta):
 
 
 func _on_hit_ground():
+	
+	
 	if apex != null :
 		
 		if (position.y - apex.y) > 200:
-			
+			$AudioStreamPlayer2D.stream = audioLanding
+			$AudioStreamPlayer2D.play()
 			LoseWater(dashWaterConsumption)
 		
 	
@@ -583,13 +605,28 @@ func _on_iframe_timeout():
 
 func releaseWaterDrop():
 	
+	$AudioStreamPlayer2D.stream = audioWaterShot
+	$AudioStreamPlayer2D.play()
+	
 	DashWaterDrop.global_position = global_position + Vector2(20,20)
-	get_tree().get_root().add_child(DashWaterDrop)
+	$"..".add_child(DashWaterDrop)
 	DashWaterDrop.initializeSize()
 	
 	DashWaterDrop2.global_position = global_position + Vector2(-20,-20)
-	get_tree().get_root().add_child(DashWaterDrop2)
+	$"..".add_child(DashWaterDrop2)
 	DashWaterDrop2.initializeSize()
 	
 	DashWaterDrop = null
 	DashWaterDrop2 = null
+
+
+func PlayerDeath():
+	
+	get_tree().change_scene_to_file("res://End_Screen.tscn")
+	
+	return # GAME OVER
+
+func damageSound():
+	
+	$AudioStreamPlayer2D.stream = audioDamages
+	$AudioStreamPlayer2D.play()

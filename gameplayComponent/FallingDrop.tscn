@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://Scripts/WaterDroplet.gd" id="1_y5r8q"]
 [ext_resource type="Texture2D" uid="uid://cvk1pw7tp4s04" path="res://utilitySprite/plain-circle.svg" id="2_mekps"]
 
-[node name="FallingDrop" type="RigidBody2D"]
-collision_layer = 6
-collision_mask = 6
+[node name="FallingDrop" type="RigidBody2D" groups=["water"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_y5r8q")
 waterAmount = 3.0
 falling = true

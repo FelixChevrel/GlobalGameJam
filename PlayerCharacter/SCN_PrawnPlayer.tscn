@@ -1,11 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://dohd1u16v6q4v"]
+[gd_scene load_steps=44 format=3 uid="uid://dohd1u16v6q4v"]
 
 [ext_resource type="Script" path="res://platformer_controller/platformer_controller.gd" id="1_s261a"]
 [ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="2_smj8w"]
 [ext_resource type="Script" path="res://Scripts/bubble.gd" id="3_0yaw3"]
 [ext_resource type="Texture2D" uid="uid://cpbis6phpkipn" path="res://PlayerCharacter/sprite/IMG_2429.png" id="4_3p423"]
 [ext_resource type="Texture2D" uid="uid://cvk1pw7tp4s04" path="res://utilitySprite/plain-circle.svg" id="4_gwj2t"]
-[ext_resource type="Texture2D" uid="uid://dj6nrq3ij1tqa" path="res://Sans titre-1.png" id="5_725x3"]
 [ext_resource type="Texture2D" uid="uid://xlqq5imtdlwt" path="res://PlayerCharacter/sprite/IMG_2421.png" id="5_t2pfl"]
 [ext_resource type="Texture2D" uid="uid://oc3mp6lhthhv" path="res://PlayerCharacter/sprite/IMG_2420.png" id="6_c0qcp"]
 [ext_resource type="Texture2D" uid="uid://3xfd5wlrckq4" path="res://PlayerCharacter/sprite/IMG_2419.png" id="7_pfgy8"]
@@ -21,9 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://b8q8p02foqhnl" path="res://PlayerCharacter/Sprite_jump/JumpFrame4.png" id="15_ud8hg"]
 [ext_resource type="PackedScene" uid="uid://djgggyx8m0xd" path="res://PauseMenu.tscn" id="16_kfrr7"]
 [ext_resource type="Texture2D" uid="uid://cbvdtq17vy7yk" path="res://PlayerCharacter/Sprite_jump/JumpFrame5.png" id="16_wd6uv"]
+[ext_resource type="AudioStream" uid="uid://d2fdg6ol8ucfd" path="res://Audio/World/Atterissage.ogg" id="21_fis0a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1mndu"]
 radius = 50.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3ee32"]
 
 [sub_resource type="Animation" id="Animation_4ht5n"]
 resource_name = "Forward"
@@ -70,7 +72,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_725x3")]
+"values": [SubResource("CompressedTexture2D_3ee32")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8krmt"]
@@ -179,6 +181,59 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_tnjw4"]
+resource_name = "Death"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PlayerDeath"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShrimpGraphic:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.5664]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShrimpGraphic:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.025, 0.025), Vector2(0.001, 0.001)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Graphic/Node2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 0.1)]
+}
+
 [sub_resource type="Animation" id="Animation_tvct7"]
 length = 0.001
 tracks/0/type = "value"
@@ -205,10 +260,47 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShrimpGraphic:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShrimpGraphic:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.025, 0.025)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphic/Node2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xrf1g"]
 _data = {
 "Dash": SubResource("Animation_6dxav"),
+"Death": SubResource("Animation_tnjw4"),
 "RESET": SubResource("Animation_tvct7")
 }
 
@@ -230,7 +322,7 @@ wait_time = 0.25
 [node name="ShrimpGraphic" type="Sprite2D" parent="."]
 position = Vector2(0, -3)
 scale = Vector2(0.025, 0.025)
-texture = ExtResource("5_725x3")
+texture = SubResource("CompressedTexture2D_3ee32")
 
 [node name="ShrimpAnim" type="AnimationPlayer" parent="ShrimpGraphic"]
 libraries = {
@@ -289,6 +381,12 @@ libraries = {
 
 [node name="ColorRect" parent="." instance=ExtResource("16_kfrr7")]
 visible = false
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_fis0a")
 
 [connection signal="hit_ground" from="." to="." method="_on_hit_ground"]
 [connection signal="timeout" from="Iframe" to="." method="_on_iframe_timeout"]

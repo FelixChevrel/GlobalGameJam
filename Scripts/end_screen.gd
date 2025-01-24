@@ -1,8 +1,13 @@
-extends Area2D
+extends Control
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if AutoloadScript.victory :
+		$Victory.visible = true
+		$GameOver.visible = false
+		
+	
 	pass # Replace with function body.
 
 
@@ -11,10 +16,7 @@ func _process(delta):
 	pass
 
 
-func _on_body_entered(body):
-	if (body.is_in_group("Player")):
-		
-		body.damageSound()
-		body.waterAmount = 0
+func _on_button_pressed():
 	
+	get_tree().change_scene_to_packed(AutoloadScript.mainMenu)
 	pass # Replace with function body.

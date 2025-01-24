@@ -29,7 +29,8 @@ func _on_area_2d_body_entered(body):
 	
 	if (body.is_in_group("Player")) :
 		
-		
+		if body.waterAmount == 50 :
+			return
 		
 		body.gainWater(waterAmount)
 		
@@ -70,5 +71,6 @@ func initializeSize():
 
 
 func _on_body_entered(body):
-	if(falling) : queue_free()
+	if(falling) : 
+		queue_free()
 	pass # Replace with function body.

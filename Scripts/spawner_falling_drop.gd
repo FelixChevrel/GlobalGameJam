@@ -43,6 +43,6 @@ func _on_drop_timer_timeout():
 	d.position = position + Vector2(rx,ry)
 	if (modifySpeed) :
 		d.fallingSpeed = newSpeed
-	get_tree().get_root().add_child(d)
+	$"..".add_child(d)
 	
 	pass # Replace with function body.
