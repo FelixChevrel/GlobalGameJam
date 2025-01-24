@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwnjaw8dqj10e"]
+[gd_scene load_steps=14 format=3 uid="uid://bwnjaw8dqj10e"]
 
 [ext_resource type="Texture2D" uid="uid://c2mbde34m075t" path="res://icon.svg" id="1_qc8qo"]
 [ext_resource type="PackedScene" uid="uid://dohd1u16v6q4v" path="res://PlayerCharacter/SCN_PrawnPlayer.tscn" id="2_ikc40"]
-[ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="3_qf0uw"]
 [ext_resource type="PackedScene" uid="uid://ds6cffs3y78qq" path="res://gameplayComponent/GPE_WeightedPlatforms.tscn" id="4_jfdei"]
+[ext_resource type="PackedScene" uid="uid://cgfkvf7nbvebq" path="res://gameplayComponent/Floating_drop.tscn" id="5_0i0i7"]
 [ext_resource type="PackedScene" uid="uid://f66sty1gxvap" path="res://gameplayComponent/SPAWNER_fallingDrop.tscn" id="5_d3j53"]
 [ext_resource type="PackedScene" uid="uid://fsgyfv4mrpw3" path="res://gameplayComponent/SandyArea.tscn" id="6_0qdw3"]
+[ext_resource type="Texture2D" uid="uid://b0x2o7laav5rl" path="res://utilitySprite/IMG_2432.png" id="7_4xes0"]
 [ext_resource type="PackedScene" uid="uid://bpgbje06befdy" path="res://gameplayComponent/PlantSeed.tscn" id="7_brrr3"]
 [ext_resource type="PackedScene" uid="uid://bhw2gsk66h0li" path="res://gameplayComponent/Grid.tscn" id="8_1hhm3"]
+[ext_resource type="Texture2D" uid="uid://df487xi5vnqhh" path="res://utilitySprite/IMG_2433.png" id="8_7u25t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x25tc"]
 size = Vector2(128.136, 122)
@@ -16,6 +18,9 @@ size = Vector2(128.136, 122)
 max_value = 2.0
 _data = [Vector2(0, 2), 0.0, 0.0803039, 0, 0, Vector2(0.152632, 1), 0.0, -1.39194, 0, 0, Vector2(1, 0.626374), 0.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_i3p3u"]
+colors = PackedColorArray(0.423382, 0.53, 0.1537, 1, 0.5785, 0.89, 0.356, 1)
 
 [node name="Node2D" type="Node2D"]
 
@@ -27,8 +32,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -40,8 +45,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon8"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon8/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -53,8 +58,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon9"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon9/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -66,8 +71,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon10"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon10/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -79,8 +84,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon2"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon2/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -92,8 +97,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon3"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon3/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -105,8 +110,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon4"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon4/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -118,10 +123,23 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon6"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon6/StaticBody2D"]
+position = Vector2(0.0340157, 0)
+shape = SubResource("RectangleShape2D_x25tc")
+
+[node name="Icon11" type="Sprite2D" parent="."]
+position = Vector2(2092, -518)
+scale = Vector2(14.6953, 1)
+texture = ExtResource("1_qc8qo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Icon11"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon11/StaticBody2D"]
 position = Vector2(0.0340157, 0)
 shape = SubResource("RectangleShape2D_x25tc")
 
@@ -132,8 +150,8 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon7"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon7/StaticBody2D"]
 position = Vector2(0.0340157, 0)
@@ -146,15 +164,12 @@ scale = Vector2(14.6953, 1)
 texture = ExtResource("1_qc8qo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon5"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon5/StaticBody2D"]
 position = Vector2(0.0340157, 0)
 shape = SubResource("RectangleShape2D_x25tc")
-
-[node name="WaterDroplet" parent="." instance=ExtResource("3_qf0uw")]
-position = Vector2(407, 149)
 
 [node name="GpeWeightedPlatforms" parent="." instance=ExtResource("4_jfdei")]
 position = Vector2(1631, 539)
@@ -166,104 +181,114 @@ position = Vector2(1842, 377)
 position = Vector2(2077, 191)
 
 [node name="SpawnerFallingDrop" parent="." instance=ExtResource("5_d3j53")]
-position = Vector2(496, -509)
+position = Vector2(952, 507)
+droplet = ExtResource("5_0i0i7")
+spawnArea = Vector2(200, 10)
+modifySpeed = true
+newSpeed = Vector2(50, -50)
+
+[node name="SpawnerFallingDrop2" parent="." instance=ExtResource("5_d3j53")]
+position = Vector2(531, -790)
+spawnArea = Vector2(75, 75)
 
 [node name="SandyArea" parent="." instance=ExtResource("6_0qdw3")]
 position = Vector2(-1063, 518)
 
 [node name="PlantRoot" type="Node2D" parent="."]
+modulate = Color(0.792, 1, 0.74, 1)
 position = Vector2(-1822, 523)
 
 [node name="Icon9" type="Sprite2D" parent="PlantRoot"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(-148, -135)
-scale = Vector2(1.4153, 0.32)
-texture = ExtResource("1_qc8qo")
+position = Vector2(-142, -98)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon9"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon9/StaticBody2D"]
-position = Vector2(0.0340157, 0)
-shape = SubResource("RectangleShape2D_x25tc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon9/StaticBody2D"]
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
 
 [node name="Icon10" type="Sprite2D" parent="PlantRoot"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(135, -262)
-scale = Vector2(1.4153, 0.32)
-texture = ExtResource("1_qc8qo")
+position = Vector2(134, -238)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
+flip_h = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon10"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon10/StaticBody2D"]
-position = Vector2(0.0340157, 0)
-shape = SubResource("RectangleShape2D_x25tc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon10/StaticBody2D"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
 
 [node name="Icon11" type="Sprite2D" parent="PlantRoot"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(-156, -421)
-scale = Vector2(1.4153, 0.32)
-texture = ExtResource("1_qc8qo")
+position = Vector2(-152, -392)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_7u25t")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon11"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon11/StaticBody2D"]
-position = Vector2(0.0340157, 0)
-shape = SubResource("RectangleShape2D_x25tc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon11/StaticBody2D"]
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
 
 [node name="Icon12" type="Sprite2D" parent="PlantRoot"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(134, -589)
-scale = Vector2(1.4153, 0.32)
-texture = ExtResource("1_qc8qo")
+position = Vector2(-172, -707)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon12"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon12/StaticBody2D"]
-position = Vector2(0.0340157, 0)
-shape = SubResource("RectangleShape2D_x25tc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon12/StaticBody2D"]
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
 
 [node name="Icon13" type="Sprite2D" parent="PlantRoot"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(-175, -743)
-scale = Vector2(1.4153, 0.32)
-texture = ExtResource("1_qc8qo")
+position = Vector2(130, -558)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_7u25t")
+flip_h = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon13"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon13/StaticBody2D"]
-position = Vector2(0.0340157, 0)
-shape = SubResource("RectangleShape2D_x25tc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon13/StaticBody2D"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
 
 [node name="Icon14" type="Sprite2D" parent="PlantRoot"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(132, -859)
-scale = Vector2(1.4153, 0.32)
-texture = ExtResource("1_qc8qo")
+position = Vector2(119, -825)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
+flip_h = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon14"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantRoot/Icon14/StaticBody2D"]
-position = Vector2(0.0340157, 0)
-shape = SubResource("RectangleShape2D_x25tc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon14/StaticBody2D"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
 
 [node name="Line2D" type="Line2D" parent="PlantRoot"]
 z_index = -2
 points = PackedVector2Array(0, 0, -8, -97, -58, -125, -7, -107, 23, -248, 44, -261, 22, -259, -33, -401, -64, -416, -36, -412, 19, -568, 42, -583, 16, -579, -52, -718, -85, -730, -51, -728, 15, -847, 38, -851)
 width = 20.0
 width_curve = SubResource("Curve_6vcjf")
-default_color = Color(0, 1, 0, 1)
+default_color = Color(0.435458, 0.601494, 0.246131, 1)
+gradient = SubResource("Gradient_i3p3u")
 
 [node name="PlantSeed" parent="." node_paths=PackedStringArray("PlanteFinal") instance=ExtResource("7_brrr3")]
 position = Vector2(-1823, 524)

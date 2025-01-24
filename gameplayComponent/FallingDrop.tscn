@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cvk1pw7tp4s04" path="res://utilitySprite/plain-circle.svg" id="2_mekps"]
 
 [node name="FallingDrop" type="RigidBody2D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_y5r8q")
 waterAmount = 3.0
 falling = true

@@ -3,10 +3,12 @@ extends RigidBody2D
 
 @export var waterAmount : float = 1
 @export var falling = false
+@export var fallingSpeed = Vector2(0,500)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mass = waterAmount * 0.01
+	
 	pass # Replace with function body.print (position.y - apex.y)
 
 
@@ -15,7 +17,7 @@ func _process(delta):
 	
 	if (falling):
 		
-		position.y += delta * 500
+		position += delta * fallingSpeed
 		
 	
 	
@@ -52,10 +54,10 @@ func _on_timer_timeout():
 
 func initializeSize():
 	
-	$Droplet.scale = 0.25 * Vector2(waterAmount, waterAmount) * 0.5
-	$CollisionPolygon2D.scale = Vector2(waterAmount, waterAmount) * 0.5
-	$Line2D.scale = Vector2(waterAmount, waterAmount) * 0.5
-	$Area2D.scale = Vector2(waterAmount, waterAmount) * 0.5
+	$Droplet.scale = (0.25 * Vector2(waterAmount, waterAmount) * 0.25) 
+	$CollisionPolygon2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
+	$Line2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
+	$Area2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
 	
 	
 

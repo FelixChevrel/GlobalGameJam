@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgfkvf7nbvebq"]
+
+[ext_resource type="PackedScene" uid="uid://b4njot250eb0i" path="res://gameplayComponent/FallingDrop.tscn" id="1_rglpu"]
+[ext_resource type="Texture2D" uid="uid://cvk1pw7tp4s04" path="res://utilitySprite/plain-circle.svg" id="2_00pba"]
+
+[node name="FallingDrop" instance=ExtResource("1_rglpu")]
+fallingSpeed = Vector2(0, -150)
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.0625, 0.0625)
+texture = ExtResource("2_00pba")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(0, -15, 7, -14, 11, -10, 14, -5, 15, 0, 14, 6, 11, 10, 7, 13, 0, 15, -6, 13, -11, 10, -13, 6, -15, 0, -13, -6, -10, -11, -6, -14)
+
+[node name="Line2D" parent="." index="2"]
+points = PackedVector2Array(0, -15, 7, -14, 11, -10, 14, -5, 15, 0, 14, 6, 11, 10, 7, 13, 0, 15, -6, 13, -11, 10, -13, 6, -15, 0, -13, -6, -10, -11, -6, -14)
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PackedVector2Array(0, -15, 7, -14, 11, -10, 14, -5, 15, 0, 14, 6, 11, 10, 7, 13, 0, 15, -6, 13, -11, 10, -13, 6, -15, 0, -13, -6, -10, -11, -6, -14)
+
+[node name="Timer" parent="." index="4"]
+wait_time = 0.5

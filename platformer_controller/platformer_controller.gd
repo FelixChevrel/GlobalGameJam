@@ -119,6 +119,7 @@ var acc = Vector2()
 #
 
 var waterAmount : float = 50
+var dashWaterConsumption : float = 8
 
 var iframe : bool = false
 
@@ -167,27 +168,34 @@ func _input(_event):
 	
 	if Input.is_action_pressed(input_left):
 		$ShrimpGraphic.flip_h = true
-		$ShrimpGraphic/ShrimpAnim.speed_scale = 1
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/NotMoving", false)
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/moving", true)
 		acc.x = -max_acceleration
 		dir.x = -1.5
 	
 	if Input.is_action_pressed(input_right):
 		$ShrimpGraphic.flip_h = false
-		$ShrimpGraphic/ShrimpAnim.speed_scale = 1
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/NotMoving", false)
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/moving", true)
 		acc.x = max_acceleration
 		dir.x = 1.5
 	
 	if (dir.x == 0):
-		$ShrimpGraphic/ShrimpAnim.speed_scale = 0.5
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/NotMoving", true)
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/moving", false)
 	
 	
 	if Input.is_action_just_pressed(input_jump):
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/jumping", true)
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/Falling", false)
 		holding_jump = true
 		start_jump_buffer_timer()
 		if (not can_hold_jump and can_ground_jump()) or can_double_jump():
 			jump()
 		
 	if Input.is_action_just_released(input_jump):
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/jumping", false)
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/Falling", true)
 		holding_jump = false
 	
 	if Input.is_action_pressed("down"):
@@ -209,12 +217,14 @@ func _input(_event):
 		dashDirection = dir
 		$DashAnimator.play("Dash")
 		
-		waterAmount -= 4
-		$Graphic/Node2D/Line2D.radius = waterAmount
+		
+		waterAmount = max(0, waterAmount-8)
+		$BubbleShape.shape.radius = (waterAmount + 30)
+		$Graphic/Node2D/Line2D.radius = (waterAmount + 30)
 		$Graphic/Node2D/Line2D.updateWater()
 		
 		DashWaterDrop = droplet.instantiate()
-		DashWaterDrop.waterAmount = 4
+		DashWaterDrop.waterAmount = dashWaterConsumption
 		DashWaterDrop.initializeSize()
 		
 		pass
@@ -260,7 +270,9 @@ func _physics_process(delta):
 	velocity.x *= 1 / (1 + (delta * friction))
 	velocity += acc * delta
 	
-	
+	if (velocity.y > 0) && (holding_jump) :
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/jumping", false)
+		$ShrimpGraphic/AnimationTree.set("parameters/conditions/Falling", true)
 	
 	_was_on_ground = is_feet_on_ground()
 	$Graphic/Node2D/Line2D.rotationSpeed = clamp(velocity.x * 0.01, -3, 3)
@@ -419,8 +431,8 @@ func LoseWater(loss : float, noDrop = false):
 	if (iframe) : return
 	
 	waterAmount = max(0, waterAmount-loss)
-	$BubbleShape.shape.radius = waterAmount
-	$Graphic/Node2D/Line2D.radius = waterAmount
+	$BubbleShape.shape.radius = (waterAmount + 30)
+	$Graphic/Node2D/Line2D.radius = (waterAmount + 30)
 	$Graphic/Node2D/Line2D.updateWater()
 	
 	if (noDrop) : 
@@ -459,10 +471,10 @@ func LoseWater(loss : float, noDrop = false):
 
 func gainWater(gain : float):
 	
-	waterAmount = clamp(waterAmount + gain, 0, 100) 
+	waterAmount = clamp(waterAmount + gain, 0, 50) 
 	
-	$BubbleShape.shape.radius = waterAmount
-	$Graphic/Node2D/Line2D.radius = waterAmount
+	$BubbleShape.shape.radius = (waterAmount + 30)
+	$Graphic/Node2D/Line2D.radius = (waterAmount + 30)
 	$Graphic/Node2D/Line2D.updateWater()
 	
 	iframe = true
@@ -542,7 +554,7 @@ func _on_hit_ground():
 		
 		if (position.y - apex.y) > 200:
 			
-			LoseWater(6)
+			LoseWater(dashWaterConsumption)
 		
 	
 	apex = null
