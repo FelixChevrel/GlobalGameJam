@@ -132,6 +132,7 @@ var iframe : bool = false
 @export var inDash : bool = false
 var can_dash : bool = true
 var DashWaterDrop : Node2D
+var DashWaterDrop2 : Node2D
 
 #apex of jump (need to be untyped)
 var apex = null
@@ -213,7 +214,6 @@ func _input(_event):
 		
 		can_dash = false
 		
-		print(dir)
 		dashDirection = dir
 		$DashAnimator.play("Dash")
 		
@@ -224,8 +224,18 @@ func _input(_event):
 		$Graphic/Node2D/Line2D.updateWater()
 		
 		DashWaterDrop = droplet.instantiate()
-		DashWaterDrop.waterAmount = dashWaterConsumption
+		DashWaterDrop.get_child(0).wait_time = 0.1
+		DashWaterDrop.linear_velocity = (-dashDirection * 1000).rotated(0.1)
+		DashWaterDrop.waterAmount = dashWaterConsumption/2
+		DashWaterDrop.scale = Vector2(0.5,0.5)
 		DashWaterDrop.initializeSize()
+		
+		DashWaterDrop2 = droplet.instantiate()
+		DashWaterDrop2.get_child(0).wait_time = 0.1
+		DashWaterDrop2.linear_velocity = (-dashDirection * 1000).rotated(-0.1)
+		DashWaterDrop2.waterAmount = dashWaterConsumption/2
+		DashWaterDrop2.scale = Vector2(0.5,0.5)
+		DashWaterDrop2.initializeSize()
 		
 		pass
 	
@@ -239,9 +249,15 @@ func _physics_process(delta):
 		
 		velocity = dashDirection * dashSpeed
 		previous_velocity = velocity
+		
+		if (apex == null) && (velocity.y > 0) && (!is_feet_on_ground()):
+			apex = position
+		
+		
 		move_and_slide()
 		SquashAndStretch(delta)
 		DirectionBuble(delta)
+		
 		return
 	
 	if is_coyote_timer_running() or current_jump_type == JumpType.NONE:
@@ -567,9 +583,13 @@ func _on_iframe_timeout():
 
 func releaseWaterDrop():
 	
-	DashWaterDrop.position = position
-	
+	DashWaterDrop.global_position = global_position + Vector2(20,20)
 	get_tree().get_root().add_child(DashWaterDrop)
-	DashWaterDrop.fallingSpeed = -dashDirection * dashSpeed * 100
 	DashWaterDrop.initializeSize()
 	
+	DashWaterDrop2.global_position = global_position + Vector2(-20,-20)
+	get_tree().get_root().add_child(DashWaterDrop2)
+	DashWaterDrop2.initializeSize()
+	
+	DashWaterDrop = null
+	DashWaterDrop2 = null

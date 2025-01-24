@@ -61,14 +61,11 @@ func _on_timer_timeout():
 
 func initializeSize():
 	
-	$Droplet.scale = (0.25 * Vector2(waterAmount, waterAmount) * 0.25) 
-	$CollisionPolygon2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
-	$Line2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
-	$Area2D.scale = (Vector2(waterAmount, waterAmount) * 0.25) 
+	$Droplet.scale = (0.25 * Vector2(waterAmount, waterAmount) * 0.5) 
+	$CollisionPolygon2D.scale = (Vector2(waterAmount, waterAmount) * 0.5) 
+	$Line2D.scale = (Vector2(waterAmount, waterAmount) * 0.5) 
+	$Area2D.scale = (Vector2(waterAmount, waterAmount) * 0.5) 
 	
-	if (!falling):
-		linear_velocity = fallingSpeed
-		
 	
 
 
