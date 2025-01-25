@@ -8,7 +8,7 @@ var waterHeld : float = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	PlanteFinal.position = position
+	#PlanteFinal.position = position
 	PlanteFinal.scale = Vector2(PlanteScale,PlanteScale)
 	
 	pass # Replace with function body.

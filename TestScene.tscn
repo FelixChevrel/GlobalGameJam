@@ -197,106 +197,6 @@ spawnArea = Vector2(75, 75)
 [node name="SandyArea" parent="." instance=ExtResource("6_0qdw3")]
 position = Vector2(-1063, 518)
 
-[node name="PlantRoot" type="Node2D" parent="."]
-modulate = Color(0.792, 1, 0.74, 1)
-position = Vector2(-1822, 523)
-
-[node name="Icon9" type="Sprite2D" parent="PlantRoot"]
-position = Vector2(-142, -98)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("7_4xes0")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon9"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon9/StaticBody2D"]
-polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
-one_way_collision = true
-
-[node name="Icon10" type="Sprite2D" parent="PlantRoot"]
-position = Vector2(134, -238)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("7_4xes0")
-flip_h = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon10"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon10/StaticBody2D"]
-scale = Vector2(-1, 1)
-polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
-one_way_collision = true
-
-[node name="Icon11" type="Sprite2D" parent="PlantRoot"]
-position = Vector2(-152, -392)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("8_7u25t")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon11"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon11/StaticBody2D"]
-polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
-one_way_collision = true
-
-[node name="Icon12" type="Sprite2D" parent="PlantRoot"]
-position = Vector2(-172, -707)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("7_4xes0")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon12"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon12/StaticBody2D"]
-polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
-one_way_collision = true
-
-[node name="Icon13" type="Sprite2D" parent="PlantRoot"]
-position = Vector2(130, -558)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("8_7u25t")
-flip_h = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon13"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon13/StaticBody2D"]
-scale = Vector2(-1, 1)
-polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
-one_way_collision = true
-
-[node name="Icon14" type="Sprite2D" parent="PlantRoot"]
-position = Vector2(119, -825)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("7_4xes0")
-flip_h = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="PlantRoot/Icon14"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantRoot/Icon14/StaticBody2D"]
-scale = Vector2(-1, 1)
-polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
-one_way_collision = true
-
-[node name="Line2D" type="Line2D" parent="PlantRoot"]
-z_index = -2
-points = PackedVector2Array(0, 0, -8, -97, -58, -125, -7, -107, 23, -248, 44, -261, 22, -259, -33, -401, -64, -416, -36, -412, 19, -568, 42, -583, 16, -579, -52, -718, -85, -730, -51, -728, 15, -847, 38, -851)
-width = 20.0
-width_curve = SubResource("Curve_6vcjf")
-default_color = Color(0.435458, 0.601494, 0.246131, 1)
-gradient = SubResource("Gradient_i3p3u")
-
-[node name="PlantSeed" parent="." node_paths=PackedStringArray("PlanteFinal") instance=ExtResource("7_brrr3")]
-position = Vector2(-1823, 524)
-PlanteFinal = NodePath("../PlantRoot")
-
 [node name="Grid" parent="." instance=ExtResource("8_1hhm3")]
 position = Vector2(-582, 529)
 
@@ -308,3 +208,104 @@ position = Vector2(-3208, 773)
 
 [node name="VictoryArea" parent="." instance=ExtResource("13_p1i4r")]
 position = Vector2(3946, 45)
+
+[node name="PlantOriginPoint" type="Node2D" parent="."]
+position = Vector2(-1827, 504)
+
+[node name="PlantRoot" type="Node2D" parent="PlantOriginPoint"]
+modulate = Color(0.792, 1, 0.74, 1)
+
+[node name="Icon9" type="Sprite2D" parent="PlantOriginPoint/PlantRoot"]
+position = Vector2(-142, -98)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantOriginPoint/PlantRoot/Icon9"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantOriginPoint/PlantRoot/Icon9/StaticBody2D"]
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
+
+[node name="Icon10" type="Sprite2D" parent="PlantOriginPoint/PlantRoot"]
+position = Vector2(134, -238)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantOriginPoint/PlantRoot/Icon10"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantOriginPoint/PlantRoot/Icon10/StaticBody2D"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
+
+[node name="Icon11" type="Sprite2D" parent="PlantOriginPoint/PlantRoot"]
+position = Vector2(-152, -392)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_7u25t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantOriginPoint/PlantRoot/Icon11"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantOriginPoint/PlantRoot/Icon11/StaticBody2D"]
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
+
+[node name="Icon12" type="Sprite2D" parent="PlantOriginPoint/PlantRoot"]
+position = Vector2(-172, -707)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantOriginPoint/PlantRoot/Icon12"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantOriginPoint/PlantRoot/Icon12/StaticBody2D"]
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
+
+[node name="Icon13" type="Sprite2D" parent="PlantOriginPoint/PlantRoot"]
+position = Vector2(130, -558)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("8_7u25t")
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantOriginPoint/PlantRoot/Icon13"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantOriginPoint/PlantRoot/Icon13/StaticBody2D"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
+
+[node name="Icon14" type="Sprite2D" parent="PlantOriginPoint/PlantRoot"]
+position = Vector2(119, -825)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("7_4xes0")
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlantOriginPoint/PlantRoot/Icon14"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlantOriginPoint/PlantRoot/Icon14/StaticBody2D"]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(746.667, -240, -500, -226.667, -800, -93.3333, -1066.67, 113.333, -900, 86.6667, -700, -53.3333, -493.333, -146.667, 640, -153.333)
+one_way_collision = true
+
+[node name="Line2D" type="Line2D" parent="PlantOriginPoint/PlantRoot"]
+z_index = -2
+points = PackedVector2Array(0, 0, -8, -97, -58, -125, -7, -107, 23, -248, 44, -261, 22, -259, -33, -401, -64, -416, -36, -412, 19, -568, 42, -583, 16, -579, -52, -718, -85, -730, -51, -728, 15, -847, 38, -851)
+width = 20.0
+width_curve = SubResource("Curve_6vcjf")
+default_color = Color(0.435458, 0.601494, 0.246131, 1)
+gradient = SubResource("Gradient_i3p3u")
+
+[node name="PlantSeed" parent="PlantOriginPoint" node_paths=PackedStringArray("PlanteFinal") instance=ExtResource("7_brrr3")]
+PlanteFinal = NodePath("../PlantRoot")

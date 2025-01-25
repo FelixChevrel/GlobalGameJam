@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba7edai8i5ayu"]
+
+[ext_resource type="Script" path="res://Scripts/gpe_water_checkpoint.gd" id="1_ig4d1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28sjl"]
+size = Vector2(526.081, 448)
+
+[node name="GpeWaterCheckpoint" type="Area2D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_ig4d1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_28sjl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -167,6 +167,10 @@ func _ready():
 		add_child(jump_buffer_timer)
 		jump_buffer_timer.wait_time = jump_buffer
 		jump_buffer_timer.one_shot = true
+	
+	$BubbleShape.shape.radius = (waterAmount + 30)
+	$Graphic/Node2D/Line2D.radius = (waterAmount + 30)
+	$Graphic/Node2D/Line2D.updateWater()
 
 
 func _input(_event):
