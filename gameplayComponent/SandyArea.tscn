@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://fsgyfv4mrpw3"]
+[gd_scene load_steps=3 format=3 uid="uid://fsgyfv4mrpw3"]
 
-[ext_resource type="Texture2D" uid="uid://di5a1pv5iuup3" path="res://icon.png" id="1_bkdi8"]
 [ext_resource type="Script" path="res://Scripts/sandy_area.gd" id="1_gjy8n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nhsra"]
@@ -14,13 +13,6 @@ script = ExtResource("1_gjy8n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_nhsra")
-
-[node name="Icon" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 0, 1)
-z_index = 2
-position = Vector2(1, 31)
-scale = Vector2(5.34375, 1)
-texture = ExtResource("1_bkdi8")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
