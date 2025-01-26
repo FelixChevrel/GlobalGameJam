@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgx62hdqc6v0t"]
+[gd_scene load_steps=3 format=3 uid="uid://bgx62hdqc6v0t"]
 
 [ext_resource type="Script" path="res://Scripts/end_screen.gd" id="1_siqrf"]
+[ext_resource type="Texture2D" uid="uid://bm4qpbyrlhx1e" path="res://utilitySprite/MainMenu.png" id="2_15lg2"]
 
 [node name="EndScreen" type="Control"]
 layout_mode = 3
@@ -13,8 +14,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_siqrf")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.81407, 0.664269)
+texture = ExtResource("2_15lg2")
+
 [node name="Victory" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,7 +45,23 @@ offset_right = 408.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.258908, 0.427112, 0.501763, 1)
+color = Color(0.174566, 0.396151, 0.274795, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Victory/ColorRect"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -257.0
+offset_right = 416.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Victory"]
 layout_mode = 1
@@ -51,9 +71,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -167.0
-offset_top = -70.0
+offset_top = -115.0
 offset_right = 167.0
-offset_bottom = 70.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -78,6 +98,7 @@ layout_mode = 2
 text = "main menu"
 
 [node name="GameOver" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -104,7 +125,23 @@ offset_right = 408.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.258908, 0.427112, 0.501763, 1)
+color = Color(0.174566, 0.396151, 0.274795, 1)
+
+[node name="ColorRect" type="ColorRect" parent="GameOver/ColorRect"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -257.0
+offset_right = 416.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
 layout_mode = 1
@@ -113,10 +150,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -167.0
-offset_top = -70.0
-offset_right = 167.0
-offset_bottom = 70.0
+offset_left = -191.0
+offset_top = -165.0
+offset_right = 191.0
+offset_bottom = 165.0
 grow_horizontal = 2
 grow_vertical = 2
 

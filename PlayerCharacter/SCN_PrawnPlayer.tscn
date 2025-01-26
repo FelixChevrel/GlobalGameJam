@@ -219,7 +219,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.04, 0.04), Vector2(0.001, 0.001)]
+"values": [Vector2(0.05, 0.05), Vector2(0.001, 0.001)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -282,7 +282,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.04, 0.04)]
+"values": [Vector2(0.05, 0.05)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -321,7 +321,7 @@ wait_time = 0.25
 
 [node name="ShrimpGraphic" type="Sprite2D" parent="."]
 position = Vector2(0, -3)
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.05, 0.05)
 texture = SubResource("CompressedTexture2D_3ee32")
 
 [node name="ShrimpAnim" type="AnimationPlayer" parent="ShrimpGraphic"]
@@ -365,11 +365,12 @@ texture = ExtResource("4_gwj2t")
 
 [node name="Label" type="Label" parent="Graphic"]
 self_modulate = Color(0, 0.781058, 0.883574, 1)
+z_index = 5
 offset_left = -22.0
 offset_top = -133.0
 offset_right = 21.0
 offset_bottom = -98.0
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 32
 text = "100"
 horizontal_alignment = 1
 script = ExtResource("15_nxdhq")

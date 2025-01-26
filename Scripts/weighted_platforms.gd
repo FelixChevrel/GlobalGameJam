@@ -2,8 +2,8 @@ extends AnimatableBody2D
 
 @export var maxWeight : float = 10
 var currentWeight : float = 0
-var maxHeight : Vector2 = Vector2(0,0)
-var minHeight : Vector2 = Vector2(0,0)
+@export var maxHeight : Vector2 = Vector2(0,0)
+@export var minHeight : Vector2 = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -9,14 +9,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -277.0
-offset_top = -277.0
-offset_right = 277.0
-offset_bottom = 277.0
+offset_left = -306.0
+offset_top = -296.0
+offset_right = 306.0
+offset_bottom = 296.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0864, 0.32, 0.32, 1)
+color = Color(0.174566, 0.396151, 0.274795, 1)
 script = ExtResource("1_wlwex")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -300.0
+offset_right = 310.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -25,10 +41,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -163.0
-offset_right = 139.0
-offset_bottom = 163.0
+offset_left = -180.0
+offset_top = -187.0
+offset_right = 180.0
+offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -127,22 +143,26 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.83
 text = "Dash"
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 text = "A"
 
 [node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 text = "E"
 
 [node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 text = "Maj"
 
 [node name="Button" type="Button" parent="."]

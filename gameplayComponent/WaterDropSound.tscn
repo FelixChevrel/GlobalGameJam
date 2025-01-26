@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b01ekjhtd6o6g"]
+
+[ext_resource type="AudioStream" uid="uid://cu1stttcqgvry" path="res://Audio/World/ImpacteGouteLeger.ogg" id="1_ariuh"]
+[ext_resource type="Script" path="res://Scripts/water_drop_sound.gd" id="1_mdrkd"]
+
+[node name="WaterDropSound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_ariuh")
+autoplay = true
+script = ExtResource("1_mdrkd")

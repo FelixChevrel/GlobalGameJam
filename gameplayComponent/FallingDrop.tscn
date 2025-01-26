@@ -7,18 +7,19 @@
 [node name="FallingDrop" type="RigidBody2D" groups=["water"]]
 collision_layer = 2
 collision_mask = 2
+sleeping = true
 script = ExtResource("1_y5r8q")
 waterAmount = 3.0
 falling = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Droplet" type="Sprite2D" parent="."]
 self_modulate = Color(0, 1, 1, 0.196078)
 scale = Vector2(0.4375, 0.4375)
 texture = ExtResource("1_0dqdb")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Droplet"]
 self_modulate = Color(0.141176, 1, 1, 0.301961)
-position = Vector2(9.14286, 13.7143)
+position = Vector2(2.28571, -2.28571)
 scale = Vector2(0.0267857, 0.0267857)
 texture = ExtResource("2_mekps")
 

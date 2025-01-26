@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://pok7lr10buqd"]
+
+[ext_resource type="Shader" uid="uid://gjjsib2lnh3v" path="res://utilitySprite/UI/new_shader.tres" id="1_rd5l0"]
+
+[resource]
+shader = ExtResource("1_rd5l0")
+shader_parameter/Vector3Parameter = Vector3(0, 0, 1)

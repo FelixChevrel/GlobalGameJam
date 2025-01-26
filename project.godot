@@ -31,6 +31,10 @@ Drinking=""
 breakable=""
 water=""
 
+[gui]
+
+theme/custom="res://utilitySprite/UI/Nori_theme.tres"
+
 [input]
 
 move_left={

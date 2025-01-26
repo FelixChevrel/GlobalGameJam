@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bwnjaw8dqj10e"]
+[gd_scene load_steps=18 format=3 uid="uid://bwnjaw8dqj10e"]
 
 [ext_resource type="Texture2D" uid="uid://c2mbde34m075t" path="res://icon.svg" id="1_qc8qo"]
 [ext_resource type="PackedScene" uid="uid://dohd1u16v6q4v" path="res://PlayerCharacter/SCN_PrawnPlayer.tscn" id="2_ikc40"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://nix5gumhw56j" path="res://gameplayComponent/GPE_BreakableBlock.tscn" id="11_0lf56"]
 [ext_resource type="PackedScene" uid="uid://bm4gmlkxvos5w" path="res://gameplayComponent/GPE_Spikes.tscn" id="12_hhxu4"]
 [ext_resource type="PackedScene" uid="uid://5o84m8msvajj" path="res://gameplayComponent/VictoryArea.tscn" id="13_p1i4r"]
+[ext_resource type="PackedScene" uid="uid://btomaa6aib7ed" path="res://gameplayComponent/GPE_RespawningBubble.tscn" id="14_agvuv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x25tc"]
 size = Vector2(128.136, 122)
@@ -176,6 +177,7 @@ shape = SubResource("RectangleShape2D_x25tc")
 
 [node name="GpeWeightedPlatforms" parent="." instance=ExtResource("4_jfdei")]
 position = Vector2(1631, 539)
+minHeight = Vector2(0, 100)
 
 [node name="GpeWeightedPlatforms3" parent="." instance=ExtResource("4_jfdei")]
 position = Vector2(1842, 377)
@@ -184,9 +186,10 @@ position = Vector2(1842, 377)
 position = Vector2(2077, 191)
 
 [node name="SpawnerFallingDrop" parent="." instance=ExtResource("5_d3j53")]
-position = Vector2(952, 507)
+position = Vector2(952, 465)
 droplet = ExtResource("5_0i0i7")
 spawnArea = Vector2(200, 10)
+timing = 5.0
 modifySpeed = true
 newSpeed = Vector2(50, -50)
 
@@ -309,3 +312,6 @@ gradient = SubResource("Gradient_i3p3u")
 
 [node name="PlantSeed" parent="PlantOriginPoint" node_paths=PackedStringArray("PlanteFinal") instance=ExtResource("7_brrr3")]
 PlanteFinal = NodePath("../PlantRoot")
+
+[node name="GpeRespawningBubble" parent="." instance=ExtResource("14_agvuv")]
+position = Vector2(-477, 282)

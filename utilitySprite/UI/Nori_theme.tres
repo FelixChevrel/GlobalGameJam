@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bcxapju6547ux"]
+
+[ext_resource type="StyleBox" uid="uid://d0fhvnigd3afd" path="res://utilitySprite/UI/StyleboxButton_Disabled.tres" id="1_g8qoe"]
+[ext_resource type="StyleBox" uid="uid://c87mrf1utj88o" path="res://utilitySprite/UI/StyleboxButton_Hover.tres" id="2_drwan"]
+[ext_resource type="StyleBox" uid="uid://dsajpack5uayt" path="res://utilitySprite/UI/StyleboxButton_Normal.tres" id="3_y4633"]
+[ext_resource type="StyleBox" uid="uid://dvp4fu15bnoq2" path="res://utilitySprite/UI/StyleboxButton_pressed.tres" id="4_7c1ee"]
+[ext_resource type="FontFile" uid="uid://cvyxfn73a32gc" path="res://utilitySprite/UI/Font/Yay Holiday.ttf" id="5_cgba3"]
+
+[resource]
+default_font = ExtResource("5_cgba3")
+default_font_size = 32
+Button/colors/font_color = Color(1, 0.789167, 0.45, 1)
+Button/colors/font_hover_color = Color(0.97, 0.60334, 0.1552, 1)
+Button/constants/outline_size = 8
+Button/styles/disabled = ExtResource("1_g8qoe")
+Button/styles/focus = ExtResource("2_drwan")
+Button/styles/hover = ExtResource("2_drwan")
+Button/styles/normal = ExtResource("3_y4633")
+Button/styles/pressed = ExtResource("4_7c1ee")
+Label/constants/outline_size = 8

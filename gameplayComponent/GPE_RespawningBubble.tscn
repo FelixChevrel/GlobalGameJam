@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://btomaa6aib7ed"]
+
+[ext_resource type="Script" path="res://Scripts/gpe_respawning_bubble.gd" id="1_845am"]
+[ext_resource type="PackedScene" uid="uid://cgfkvf7nbvebq" path="res://gameplayComponent/Floating_drop.tscn" id="2_vrwuv"]
+
+[node name="GpeRespawningBubble" type="Node2D"]
+script = ExtResource("1_845am")
+bubble = ExtResource("2_vrwuv")
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
