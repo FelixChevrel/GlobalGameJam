@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="GGJ2025-Projet"
+config/name="Nori"
 run/main_scene="res://Main Menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Nori Title.png"
 
 [autoload]
 

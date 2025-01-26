@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpgbje06befdy"]
 
 [ext_resource type="Script" path="res://Scripts/plant_seed.gd" id="1_updtx"]
-[ext_resource type="Texture2D" uid="uid://cb4ccebfdlhw6" path="res://EnvironmentSprite(placeholder)/Seed.png" id="2_8pe2y"]
+[ext_resource type="Texture2D" uid="uid://d3848636eg50r" path="res://EnvironmentSprite(placeholder)/Seed (2).png" id="2_j52n2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea1w1"]
 size = Vector2(38, 38)
@@ -61,9 +61,9 @@ _data = {
 script = ExtResource("1_updtx")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(5, 1)
-scale = Vector2(0.136719, 0.136719)
-texture = ExtResource("2_8pe2y")
+position = Vector2(-3, 2)
+scale = Vector2(0.0898438, 0.0898438)
+texture = ExtResource("2_j52n2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ea1w1")
@@ -75,6 +75,7 @@ libraries = {
 
 [node name="Label" type="Label" parent="."]
 self_modulate = Color(0, 1, 0, 1)
+z_index = 10
 offset_left = -19.0
 offset_top = 23.0
 offset_right = 21.0

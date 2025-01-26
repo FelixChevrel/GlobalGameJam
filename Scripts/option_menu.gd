@@ -16,3 +16,8 @@ signal closedOptions
 func _on_button_pressed():
 	emit_signal("closedOptions")
 	pass # Replace with function body.
+
+
+func _on_button_2_pressed():
+	AutoloadScript.Checkpoint = Vector2(0,0)
+	pass # Replace with function body.

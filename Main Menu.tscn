@@ -38,8 +38,7 @@ text = "Play"
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_ihlgr")
-disabled = true
-text = "Options (work in progress)"
+text = "Options"
 
 [node name="quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2

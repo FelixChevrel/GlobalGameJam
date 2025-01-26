@@ -521,7 +521,7 @@ func gainWater(gain : float):
 	
 	iframe = true
 	$Iframe.start()
-	velocity.y = -500
+	velocity.y += -500
 
 #Constante
 var MAX_DEFORM_SPEED = 2000 #La vitesse y à laquelle la déformation maximal est appliqué
