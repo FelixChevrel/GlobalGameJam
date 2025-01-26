@@ -20,3 +20,11 @@ func _on_button_pressed():
 	
 	get_tree().change_scene_to_packed(AutoloadScript.mainMenu)
 	pass # Replace with function body.
+
+
+func _on_button_2_pressed():
+	
+	
+	get_tree().change_scene_to_packed(AutoloadScript.level)
+	
+	pass # Replace with function body.

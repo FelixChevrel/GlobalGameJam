@@ -16,7 +16,7 @@ func _ready():
 	if (lifetime > 0):
 		await get_tree().create_timer(lifetime).timeout
 	
-	if (falling):
+	if (fallingSpeed.length() != 0) :
 		gravity_scale = 0
 	
 	pass # Replace with function body.print (position.y - apex.y)
@@ -25,8 +25,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if (falling):
-		gravity_scale = 0
+	if (fallingSpeed.length() != 0):
+		
 		position += delta * fallingSpeed
 		
 	

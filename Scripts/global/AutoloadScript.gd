@@ -1,7 +1,7 @@
 extends Node
 
 var mainMenu = preload("res://Main Menu.tscn")
-var level = preload("res://TestScene.tscn")
+var level = preload("res://LevelScene.tscn")
 
 var victory := false
 

@@ -15,7 +15,7 @@ func spawnBubble():
 	var newBubble = bubble.instantiate()
 	newBubble.position = Vector2(0,0)
 	newBubble.fallingSpeed = Vector2(0,0)
-	newBubble.falling = false
+	newBubble.falling = true
 	add_child(newBubble)
 	
 

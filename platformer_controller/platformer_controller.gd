@@ -156,6 +156,9 @@ func _init():
 
 func _ready():
 	
+	#load player position 
+	global_position = AutoloadScript.Checkpoint
+	
 	$ShrimpGraphic/ShrimpAnim.play("Forward")
 	
 	if is_coyote_time_enabled:
