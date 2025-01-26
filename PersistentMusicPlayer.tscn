@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwihvlvcxoryt"]
+
+[ext_resource type="AudioStream" uid="uid://krbsbvuquk1p" path="res://Audio/Music/ArtemieOddisey-0-1.ogg" id="1_umm4t"]
+[ext_resource type="Script" path="res://Scripts/MusicPlayer.gd" id="2_5nril"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_umm4t")
+volume_db = -10.0
+autoplay = true
+script = ExtResource("2_5nril")

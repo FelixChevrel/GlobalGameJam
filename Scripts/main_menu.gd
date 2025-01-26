@@ -16,3 +16,8 @@ func _on_option_pressed():
 func _on_color_rect_closed_options():
 	$ColorRect.visible = false
 	pass # Replace with function body.
+
+
+func _on_quit_pressed():
+	get_tree().quit()
+	pass # Replace with function body.

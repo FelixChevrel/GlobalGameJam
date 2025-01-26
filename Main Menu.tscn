@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bem5yd0kkgxaf"]
+[gd_scene load_steps=6 format=3 uid="uid://bem5yd0kkgxaf"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_58mq7"]
 [ext_resource type="PackedScene" uid="uid://cuhq7pm1lhhks" path="res://OptionMenu.tscn" id="2_pomqv"]
 [ext_resource type="Texture2D" uid="uid://bm4qpbyrlhx1e" path="res://utilitySprite/MainMenu.png" id="2_q5scb"]
 [ext_resource type="Theme" uid="uid://bcxapju6547ux" path="res://utilitySprite/UI/Nori_theme.tres" id="3_ihlgr"]
+[ext_resource type="Texture2D" uid="uid://qing2l40prwa" path="res://utilitySprite/Nori Title.png" id="5_bb40d"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_58mq7")
@@ -19,10 +20,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -182.0
-offset_top = -68.0
-offset_right = 183.0
-offset_bottom = 187.0
+offset_left = -926.0
+offset_top = 8.0
+offset_right = -561.0
+offset_bottom = 263.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -37,7 +38,8 @@ text = "Play"
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("3_ihlgr")
-text = "Options"
+disabled = true
+text = "Options (work in progress)"
 
 [node name="quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -50,6 +52,12 @@ text = "Quit"
 [node name="ColorRect" parent="." instance=ExtResource("2_pomqv")]
 visible = false
 
+[node name="NoriTitle" type="Sprite2D" parent="."]
+position = Vector2(4.00001, -1)
+scale = Vector2(0.358398, 0.358398)
+texture = ExtResource("5_bb40d")
+
 [connection signal="pressed" from="VBoxContainer/play" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]
 [connection signal="closedOptions" from="ColorRect" to="." method="_on_color_rect_closed_options"]
