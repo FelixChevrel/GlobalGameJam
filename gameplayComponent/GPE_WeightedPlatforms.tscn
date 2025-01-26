@@ -1,33 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds6cffs3y78qq"]
+[gd_scene load_steps=7 format=3 uid="uid://ds6cffs3y78qq"]
 
-[ext_resource type="Texture2D" uid="uid://di5a1pv5iuup3" path="res://icon.png" id="1_258nm"]
 [ext_resource type="Script" path="res://Scripts/weighted_platforms.gd" id="1_jk781"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qth2n"]
-size = Vector2(228, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aovvf"]
-size = Vector2(228, 20)
+[ext_resource type="Texture2D" uid="uid://e7njjf8ecw3r" path="res://EnvironmentSprite(placeholder)/plaftormeQuiTombe.png" id="2_aiolj"]
 
 [sub_resource type="Curve" id="Curve_na7gi"]
 min_value = 0.1
-_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0.501351), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_oenpk"]
+colors = PackedColorArray(0, 0.76, 0.354667, 1, 7.46027e-07, 0.360037, 0.272943, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qth2n"]
+size = Vector2(228, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aovvf"]
+size = Vector2(228, 20)
 
 [node name="GpeWeightedPlatforms" type="AnimatableBody2D"]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_jk781")
 
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 100, 0, 200, 0, 300, 0, 400, 0, 500)
+width_curve = SubResource("Curve_na7gi")
+gradient = SubResource("Gradient_oenpk")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.5)
+position = Vector2(0, 13.5)
 shape = SubResource("RectangleShape2D_qth2n")
 
 [node name="Icon" type="Sprite2D" parent="CollisionShape2D"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(0, -0.5)
-scale = Vector2(3.5625, 0.234375)
-texture = ExtResource("1_258nm")
+position = Vector2(0, 0.5)
+scale = Vector2(0.223881, 0.223881)
+texture = ExtResource("2_aiolj")
 
 [node name="Area2D" type="Area2D" parent="CollisionShape2D"]
 position = Vector2(0, -7.5)
@@ -35,13 +42,8 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/Area2D"]
-position = Vector2(0, -11)
+position = Vector2(0, -17)
 shape = SubResource("RectangleShape2D_aovvf")
 
 [node name="EndPoint" type="Node2D" parent="."]
 position = Vector2(0, 500)
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 100, 0, 200, 0, 300, 0, 400, 0, 500)
-width_curve = SubResource("Curve_na7gi")
-default_color = Color(0, 1, 0, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dohd1u16v6q4v"]
+[gd_scene load_steps=65 format=3 uid="uid://dohd1u16v6q4v"]
 
 [ext_resource type="Script" path="res://platformer_controller/platformer_controller.gd" id="1_s261a"]
 [ext_resource type="PackedScene" uid="uid://1u506ll718wq" path="res://gameplayComponent/WaterDroplet.tscn" id="2_smj8w"]
@@ -19,8 +19,20 @@
 [ext_resource type="Script" path="res://Scripts/WaterLabel.gd" id="15_nxdhq"]
 [ext_resource type="Texture2D" uid="uid://b8q8p02foqhnl" path="res://PlayerCharacter/Sprite_jump/JumpFrame4.png" id="15_ud8hg"]
 [ext_resource type="PackedScene" uid="uid://djgggyx8m0xd" path="res://PauseMenu.tscn" id="16_kfrr7"]
+[ext_resource type="Texture2D" uid="uid://bdpjyh88aoiev" path="res://PlayerCharacter/SpriteDash/IMG_2467.png" id="16_li7qy"]
 [ext_resource type="Texture2D" uid="uid://cbvdtq17vy7yk" path="res://PlayerCharacter/Sprite_jump/JumpFrame5.png" id="16_wd6uv"]
+[ext_resource type="Texture2D" uid="uid://ccskdmgiffflc" path="res://PlayerCharacter/SpriteDash/IMG_2466.png" id="17_21oet"]
+[ext_resource type="Texture2D" uid="uid://xpiis44o7x0f" path="res://PlayerCharacter/SpriteDash/IMG_2465.png" id="18_oemji"]
+[ext_resource type="Texture2D" uid="uid://drpyo3jxkopnf" path="res://PlayerCharacter/SpriteDash/IMG_2464.png" id="19_hr2au"]
+[ext_resource type="Texture2D" uid="uid://cmymk1xx3kwsy" path="res://PlayerCharacter/SpriteDash/IMG_2463.png" id="20_584ju"]
 [ext_resource type="AudioStream" uid="uid://d2fdg6ol8ucfd" path="res://Audio/World/Atterissage.ogg" id="21_fis0a"]
+[ext_resource type="Texture2D" uid="uid://bcjdiv6kxyaab" path="res://PlayerCharacter/SpriteDash/IMG_2462.png" id="21_rebmi"]
+[ext_resource type="Texture2D" uid="uid://ce3xhhkdoy17g" path="res://PlayerCharacter/SpriteDash/IMG_2461.png" id="22_wpv5c"]
+[ext_resource type="Texture2D" uid="uid://bmosfskf1ldma" path="res://PlayerCharacter/SpriteDash/IMG_2460.png" id="23_x5tgy"]
+[ext_resource type="Texture2D" uid="uid://dr6m4x5d5aanr" path="res://PlayerCharacter/SpriteDash/IMG_2459.png" id="24_vy42j"]
+[ext_resource type="Texture2D" uid="uid://cwf46gpmllknu" path="res://PlayerCharacter/SpriteDash/IMG_2458.png" id="25_2fejt"]
+[ext_resource type="Texture2D" uid="uid://lw0x7ui4ji1a" path="res://PlayerCharacter/SpriteDash/IMG_2457.png" id="26_fs4hx"]
+[ext_resource type="Texture2D" uid="uid://c8uu1enyrbyd2" path="res://PlayerCharacter/SpriteDash/IMG_2456.png" id="27_p1bo2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1mndu"]
 radius = 50.0
@@ -75,12 +87,35 @@ tracks/0/keys = {
 "values": [SubResource("CompressedTexture2D_3ee32")]
 }
 
+[sub_resource type="Animation" id="Animation_uwaoa"]
+resource_name = "Dash"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("16_li7qy"), ExtResource("17_21oet"), ExtResource("18_oemji"), ExtResource("19_hr2au"), ExtResource("20_584ju"), ExtResource("21_rebmi"), ExtResource("22_wpv5c"), ExtResource("23_x5tgy"), ExtResource("24_vy42j"), ExtResource("25_2fejt"), ExtResource("26_fs4hx"), ExtResource("27_p1bo2"), ExtResource("16_li7qy")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8krmt"]
 _data = {
+"Dash": SubResource("Animation_uwaoa"),
 "Forward": SubResource("Animation_4ht5n"),
 "Jump": SubResource("Animation_618dl"),
 "RESET": SubResource("Animation_sipvi")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ti6f0"]
+animation = &"Dash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ld1a"]
+animation = &"Dash"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g3rin"]
 animation = &"Jump"
@@ -127,9 +162,37 @@ advance_condition = &"Falling"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8gq1"]
+advance_mode = 2
+advance_condition = &"Dash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8a03x"]
+advance_mode = 2
+advance_condition = &"Dash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_phths"]
+advance_mode = 2
+advance_condition = &"Dash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i51l0"]
+advance_mode = 2
+advance_condition = &"Dash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ufvg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oybmb"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dx1yb"]
+states/Dash/node = SubResource("AnimationNodeAnimation_5ld1a")
+states/Dash/position = Vector2(184, 249)
+"states/Dash 2/node" = SubResource("AnimationNodeAnimation_ti6f0")
+"states/Dash 2/position" = Vector2(863, 249)
 states/Fall/node = SubResource("AnimationNodeAnimation_g3rin")
-states/Fall/position = Vector2(655, 144)
+states/Fall/position = Vector2(648, 144)
 states/Forward/node = SubResource("AnimationNodeAnimation_x5vid")
 states/Forward/position = Vector2(410, 249)
 states/Jump/node = SubResource("AnimationNodeAnimation_dk618")
@@ -137,7 +200,8 @@ states/Jump/position = Vector2(648, 249)
 states/Start/position = Vector2(184, 144)
 states/idle/node = SubResource("AnimationNodeAnimation_v3hih")
 states/idle/position = Vector2(410, 144)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_pbvm7"), "idle", "Forward", SubResource("AnimationNodeStateMachineTransition_au4ni"), "Forward", "idle", SubResource("AnimationNodeStateMachineTransition_wqs64"), "Forward", "Jump", SubResource("AnimationNodeStateMachineTransition_eeang"), "idle", "Jump", SubResource("AnimationNodeStateMachineTransition_o5ejd"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_gvg2o"), "Fall", "idle", SubResource("AnimationNodeStateMachineTransition_qo1pk")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_pbvm7"), "idle", "Forward", SubResource("AnimationNodeStateMachineTransition_au4ni"), "Forward", "idle", SubResource("AnimationNodeStateMachineTransition_wqs64"), "Forward", "Jump", SubResource("AnimationNodeStateMachineTransition_eeang"), "idle", "Jump", SubResource("AnimationNodeStateMachineTransition_o5ejd"), "Jump", "Fall", SubResource("AnimationNodeStateMachineTransition_gvg2o"), "Fall", "idle", SubResource("AnimationNodeStateMachineTransition_qo1pk"), "idle", "Dash", SubResource("AnimationNodeStateMachineTransition_k8gq1"), "Forward", "Dash", SubResource("AnimationNodeStateMachineTransition_8a03x"), "Jump", "Dash 2", SubResource("AnimationNodeStateMachineTransition_phths"), "Fall", "Dash 2", SubResource("AnimationNodeStateMachineTransition_i51l0"), "Dash 2", "Fall", SubResource("AnimationNodeStateMachineTransition_3ufvg"), "Dash", "idle", SubResource("AnimationNodeStateMachineTransition_oybmb")]
+graph_offset = Vector2(-494, 85)
 
 [sub_resource type="Animation" id="Animation_6dxav"]
 resource_name = "Dash"
@@ -179,6 +243,18 @@ tracks/2/keys = {
 "args": [],
 "method": &"releaseWaterDrop"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShrimpGraphic/AnimationTree:parameters/conditions/Dash")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_tnjw4"]
@@ -296,6 +372,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShrimpGraphic/AnimationTree:parameters/conditions/Dash")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xrf1g"]
 _data = {
@@ -332,6 +420,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="ShrimpGraphic"]
 tree_root = SubResource("AnimationNodeStateMachine_dx1yb")
 anim_player = NodePath("../ShrimpAnim")
+parameters/conditions/Dash = false
 parameters/conditions/Falling = false
 parameters/conditions/NotMoving = false
 parameters/conditions/jumping = false
